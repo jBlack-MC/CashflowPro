@@ -208,7 +208,7 @@ com.example.cashflowpro
 
 **Sibusiso Mabena*ST10462532* 
 
-**Uanthi Mgandela*ST10447100*
+**Unathi Mgandela*ST10447100*
 
 IT Student – Software Development
 
