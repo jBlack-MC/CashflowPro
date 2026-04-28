@@ -1,0 +1,22 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+    <!-- Outer Shadow/Depth -->
+    <path
+        android:fillColor="#1B5E20"
+        android:pathData="M50,50m-48,0a48,48 0,1 1,96 0a48,48 0,1 1,-96 0" />
+    <!-- Main Green Circle -->
+    <path
+        android:fillColor="#2ECC71"
+        android:pathData="M50,48m-46,0a46,46 0,1 1,92 0a46,46 0,1 1,-92 0" />
+    <!-- Inner White Dollar Sign -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M50,20V80M68,35H45c-5,0 -9,4 -9,9s4,9 9,9h10c5,0 9,4 9,9s-4,9 -9,9H32"
+        android:strokeWidth="8"
+        android:strokeColor="#FFFFFF"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"/>
+</vector>

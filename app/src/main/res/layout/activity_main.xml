@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#E9EEF2">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="12dp">
+
+        <!-- Phone frame outer container -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/phoneFrame"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:cardCornerRadius="32dp"
+            app:cardElevation="12dp"
+            app:cardBackgroundColor="#FFFFFF">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:padding="24dp"
+                android:minHeight="640dp">
+
+                <!-- Logo Wrapper -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginBottom="20dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:background="#0B2B4F"
+                        android:paddingStart="22dp"
+                        android:paddingEnd="22dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:elevation="6dp"
+                        android:backgroundTint="#0B2B4F">
+
+                        <TextView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:text="$"
+                            android:textSize="18sp"
+                            android:textColor="#FFFFFF"
+                            android:gravity="center"
+                            android:background="#2ECC71"
+                            android:padding="5dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cashflow Pro"
+                            android:textSize="21sp"
+                            android:textColor="#FFFFFF"
+                            android:textStyle="bold"
+                            android:letterSpacing="0.03"
+                            android:layout_marginStart="8dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Tagline -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Smart Budgeting Made Simple"
+                    android:textSize="14sp"
+                    android:textColor="#4A5A6E"
+                    android:layout_marginBottom="40dp"
+                    android:paddingBottom="12dp"
+                    android:drawablePadding="0"
+                    android:background="@drawable/splash_tagline_divider" />
+
+                <!-- Center Content Container -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <!-- Loading Dots (Material Design Style) -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_marginBottom="32dp">
+
+                        <View
+                            android:id="@+id/dot1"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:background="#0B2B4F"
+                            android:layout_marginEnd="8dp" />
+
+                        <View
+                            android:id="@+id/dot2"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:background="#2ECC71"
+                            android:layout_marginEnd="8dp" />
+
+                        <View
+                            android:id="@+id/dot3"
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:background="#0B2B4F" />
+                    </LinearLayout>
+
+                    <!-- Info Card (Monthly Budget) -->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        app:cardCornerRadius="28dp"
+                        app:cardElevation="4dp"
+                        app:cardBackgroundColor="#F1F5F9">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="space_between"
+                            android:padding="18dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="💰 Monthly budget"
+                                android:textSize="14sp"
+                                android:textColor="#1E293B"
+                                android:textStyle="bold" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="#FFFFFF"
+                                android:paddingStart="16dp"
+                                android:paddingEnd="16dp"
+                                android:paddingTop="6dp"
+                                android:paddingBottom="6dp"
+                                android:backgroundTint="#FFFFFF"
+                                android:elevation="2dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="$2,450 left"
+                                    android:textSize="13sp"
+                                    android:textColor="#0B2B4F"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Success Note (Green) -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:background="#E6F7EC"
+                        android:paddingStart="18dp"
+                        android:paddingEnd="18dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:layout_marginBottom="12dp"
+                        android:backgroundTint="#E6F7EC">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="✅"
+                            android:textSize="14sp"
+                            android:layout_marginEnd="6dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="No overspending"
+                            android:textSize="13sp"
+                            android:textColor="#2ECC71"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- Warning Note (Red) -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:background="#FEE9E7"
+                        android:paddingStart="18dp"
+                        android:paddingEnd="18dp"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:layout_marginBottom="32dp"
+                        android:backgroundTint="#FEE9E7">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="⚠️"
+                            android:textSize="14sp"
+                            android:layout_marginEnd="6dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Dining out +12%"
+                            android:textSize="13sp"
+                            android:textColor="#D14545"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- Ghost Button -->
+                    <Button
+                        android:id="@+id/btnGetStarted"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Get started"
+                        android:textSize="14sp"
+                        android:textColor="#0B2B4F"
+                        android:textStyle="bold"
+                        android:background="@android:color/transparent"
+                        android:paddingStart="36dp"
+                        android:paddingEnd="36dp"
+                        android:paddingTop="12dp"
+                        android:paddingBottom="12dp"
+                        android:stateListAnimator="@null"
+                        style="@style/Widget.Material3.Button.OutlinedButton" />
+
+                    <!-- Loading Footer Text -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="loading your dashboard ..."
+                        android:textSize="12sp"
+                        android:textColor="#94A3B8"
+                        android:layout_marginTop="32dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

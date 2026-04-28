@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#EEF2F5">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <!-- Phone frame outer container -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/phoneFrame"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:cardCornerRadius="36dp"
+            app:cardElevation="12dp"
+            app:cardBackgroundColor="#FFFFFF">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <!-- Logo Wrapper -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginBottom="20dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:background="#0A2540"
+                        android:paddingStart="24dp"
+                        android:paddingEnd="24dp"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:elevation="6dp"
+                        android:backgroundTint="#0A2540">
+
+                        <TextView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:text="$"
+                            android:textSize="20sp"
+                            android:textColor="#FFFFFF"
+                            android:gravity="center"
+                            android:background="#2ECC71"
+                            android:padding="5dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cashflow Pro"
+                            android:textSize="23sp"
+                            android:textColor="#FFFFFF"
+                            android:textStyle="bold"
+                            android:letterSpacing="0.02"
+                            android:layout_marginStart="10dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Title -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Register"
+                    android:textSize="28sp"
+                    android:textColor="#0A2540"
+                    android:textStyle="normal"
+                    android:layout_marginBottom="20dp"
+                    android:letterSpacing="-0.01" />
+
+                <!-- Register Form Card -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:cardCornerRadius="28dp"
+                    app:cardElevation="8dp"
+                    app:cardBackgroundColor="#FFFFFF">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <!-- Username Field -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginBottom="20dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Username"
+                                android:textSize="14sp"
+                                android:textColor="#3A4E66"
+                                android:textStyle="bold"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginBottom="6dp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:background="#F1F6FA"
+                                android:paddingStart="20dp"
+                                android:paddingEnd="20dp"
+                                android:paddingTop="4dp"
+                                android:paddingBottom="4dp"
+                                android:backgroundTint="#F1F6FA">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="👤"
+                                    android:textSize="18sp"
+                                    android:layout_marginEnd="10dp" />
+
+                                <EditText
+                                    android:id="@+id/etUsername"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="cashflow_user"
+                                    android:textSize="16sp"
+                                    android:textColor="#1A2B3E"
+                                    android:background="@android:color/transparent"
+                                    android:paddingTop="16dp"
+                                    android:paddingBottom="16dp"
+                                    android:inputType="text"
+                                    android:focusable="false"
+                                    android:cursorVisible="false"
+                                    android:longClickable="false" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <!-- Email Field -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginBottom="20dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Email"
+                                android:textSize="14sp"
+                                android:textColor="#3A4E66"
+                                android:textStyle="bold"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginBottom="6dp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:background="#F1F6FA"
+                                android:paddingStart="20dp"
+                                android:paddingEnd="20dp"
+                                android:paddingTop="4dp"
+                                android:paddingBottom="4dp"
+                                android:backgroundTint="#F1F6FA">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="📧"
+                                    android:textSize="18sp"
+                                    android:layout_marginEnd="10dp" />
+
+                                <EditText
+                                    android:id="@+id/etEmail"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="demo@cashflow.pro"
+                                    android:textSize="16sp"
+                                    android:textColor="#1A2B3E"
+                                    android:background="@android:color/transparent"
+                                    android:paddingTop="16dp"
+                                    android:paddingBottom="16dp"
+                                    android:inputType="textEmailAddress"
+                                    android:focusable="false"
+                                    android:cursorVisible="false"
+                                    android:longClickable="false" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <!-- Password Field -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginBottom="20dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Password"
+                                android:textSize="14sp"
+                                android:textColor="#3A4E66"
+                                android:textStyle="bold"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginBottom="6dp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:background="#F1F6FA"
+                                android:paddingStart="20dp"
+                                android:paddingEnd="20dp"
+                                android:paddingTop="4dp"
+                                android:paddingBottom="4dp"
+                                android:backgroundTint="#F1F6FA">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="🔒"
+                                    android:textSize="18sp"
+                                    android:layout_marginEnd="10dp" />
+
+                                <EditText
+                                    android:id="@+id/etPassword"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="password123"
+                                    android:textSize="16sp"
+                                    android:textColor="#1A2B3E"
+                                    android:background="@android:color/transparent"
+                                    android:paddingTop="16dp"
+                                    android:paddingBottom="16dp"
+                                    android:inputType="textPassword"
+                                    android:focusable="false"
+                                    android:cursorVisible="false"
+                                    android:longClickable="false" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <!-- Confirm Password Field -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginBottom="8dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Confirm Password"
+                                android:textSize="14sp"
+                                android:textColor="#3A4E66"
+                                android:textStyle="bold"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginBottom="6dp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical"
+                                android:background="#F1F6FA"
+                                android:paddingStart="20dp"
+                                android:paddingEnd="20dp"
+                                android:paddingTop="4dp"
+                                android:paddingBottom="4dp"
+                                android:backgroundTint="#F1F6FA">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="✓"
+                                    android:textSize="18sp"
+                                    android:layout_marginEnd="10dp" />
+
+                                <EditText
+                                    android:id="@+id/etConfirmPassword"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:text="password123"
+                                    android:textSize="16sp"
+                                    android:textColor="#1A2B3E"
+                                    android:background="@android:color/transparent"
+                                    android:paddingTop="16dp"
+                                    android:paddingBottom="16dp"
+                                    android:inputType="textPassword"
+                                    android:focusable="false"
+                                    android:cursorVisible="false"
+                                    android:longClickable="false" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <!-- Register Button -->
+                        <Button
+                            android:id="@+id/btnRegister"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Create account"
+                            android:textSize="18sp"
+                            android:textColor="#FFFFFF"
+                            android:textStyle="bold"
+                            android:background="#0A2540"
+                            android:paddingTop="16dp"
+                            android:paddingBottom="16dp"
+                            android:layout_marginTop="8dp"
+                            android:letterSpacing="0.03"
+                            android:stateListAnimator="@null"
+                            android:elevation="8dp" />
+
+                        <!-- Login Link -->
+                        <TextView
+                            android:id="@+id/tvLoginLink"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Already have an account? Login"
+                            android:textSize="16sp"
+                            android:textColor="#0A2540"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:layout_marginTop="20dp"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            android:padding="8dp" />
+
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Budget Hints Row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp">
+
+                    <!-- Success Hint -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:background="#E2F7E9"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp"
+                        android:layout_marginEnd="12dp"
+                        android:backgroundTint="#E2F7E9">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="✓"
+                            android:textSize="16sp"
+                            android:textColor="#1D8844"
+                            android:layout_marginEnd="4dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="$2,450 left"
+                            android:textSize="13sp"
+                            android:textColor="#1D8844"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- Warning Hint -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:background="#FFEAE8"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp"
+                        android:backgroundTint="#FFEAE8">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="!"
+                            android:textSize="16sp"
+                            android:textColor="#C73B3B"
+                            android:layout_marginEnd="4dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Dining +12%"
+                            android:textSize="13sp"
+                            android:textColor="#C73B3B"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Demo Footer Note -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Join 50k+ smart budgeters"
+                    android:textSize="12sp"
+                    android:textColor="#A7B8C9"
+                    android:gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
