@@ -54,11 +54,15 @@
                         android:elevation="6dp"
                         android:backgroundTint="#0A2540">
 
-                        <ImageView
+                        <TextView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            android:src="@drawable/logo"
-                            android:contentDescription="Logo" />
+                            android:text="$"
+                            android:textSize="20sp"
+                            android:textColor="#FFFFFF"
+                            android:gravity="center"
+                            android:background="#2ECC71"
+                            android:padding="5dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -118,6 +122,7 @@
                                 android:textAllCaps="true" />
 
                             <TextView
+                                android:id="@+id/tvTotalBudget"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="R5,000"
@@ -157,9 +162,10 @@
                                 android:textAllCaps="true" />
 
                             <TextView
+                                android:id="@+id/tvTotalSpent"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="R3,200"
+                                android:text="R0"
                                 android:textSize="22sp"
                                 android:textColor="#0A2540"
                                 android:textStyle="bold"
@@ -195,9 +201,10 @@
                                 android:textAllCaps="true" />
 
                             <TextView
+                                android:id="@+id/tvRemaining"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="R1,800"
+                                android:text="R5,000"
                                 android:textSize="22sp"
                                 android:textColor="#2ECC71"
                                 android:textStyle="bold"
@@ -239,9 +246,10 @@
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/tvBudgetUsedAmount"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="R3,200"
+                                android:text="R0"
                                 android:textSize="14sp"
                                 android:textColor="#C73B3B"
                                 android:textStyle="bold" />
@@ -255,15 +263,18 @@
                             android:orientation="horizontal">
 
                             <View
+                                android:id="@+id/viewProgressBar"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight="64"
+                                android:layout_weight="0"
                                 android:background="#0A2540" />
 
-                            <Space
+                            <View
+                                android:id="@+id/viewProgressRemaining"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_weight="36" />
+                                android:layout_weight="100"
+                                android:background="#E0E9F2" />
                         </LinearLayout>
 
                         <!-- Progress Stats -->
@@ -275,17 +286,19 @@
                             android:layout_marginTop="10dp">
 
                             <TextView
+                                android:id="@+id/tvLeftLabel"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="✓ R1,800 left"
+                                android:text="✓ R5,000 left"
                                 android:textSize="13sp"
                                 android:textColor="#2ECC71"
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/tvPercentUsed"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="64% used"
+                                android:text="0% used"
                                 android:textSize="13sp"
                                 android:textColor="#5D738B" />
                         </LinearLayout>
@@ -336,9 +349,10 @@
                                 android:layout_marginBottom="6dp" />
 
                             <TextView
+                                android:id="@+id/tvGroceriesSpent"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="R1,200"
+                                android:text="R0"
                                 android:textSize="20sp"
                                 android:textColor="#1E2F40"
                                 android:textStyle="bold" />
@@ -395,9 +409,10 @@
                                 android:layout_marginBottom="6dp" />
 
                             <TextView
+                                android:id="@+id/tvTransportSpent"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="R650"
+                                android:text="R0"
                                 android:textSize="20sp"
                                 android:textColor="#1E2F40"
                                 android:textStyle="bold" />
@@ -449,13 +464,13 @@
                                 android:text="🍿 Entertainment"
                                 android:textSize="14sp"
                                 android:textColor="#0A2540"
-                                android:textStyle="bold"
-                                android:layout_marginBottom="6dp" />
+                                android:textStyle="bold"                                 android:layout_marginBottom="6dp" />
 
                             <TextView
+                                android:id="@+id/tvEntertainmentSpent"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="R1,350"
+                                android:text="R0"
                                 android:textSize="20sp"
                                 android:textColor="#1E2F40"
                                 android:textStyle="bold" />
@@ -471,11 +486,11 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="⚠ +50%"
+                                android:text="✓ okay"
                                 android:textSize="11sp"
-                                android:textColor="#C73B3B"
+                                android:textColor="#1D8844"
                                 android:textStyle="bold"
-                                android:background="#FFEAE8"
+                                android:background="#E2F7E9"
                                 android:paddingStart="10dp"
                                 android:paddingEnd="10dp"
                                 android:paddingTop="4dp"
