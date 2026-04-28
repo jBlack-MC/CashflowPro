@@ -136,20 +136,12 @@ Build → Make Project
 
 ---
 
-## 📦 APK
-
-The APK file is included in the repository under:
-
-```
-/app/build/outputs/apk/
-```
-
 ---
 
 ## 🎥 Demo Video
 
 Watch the full demonstration here:
-👉 **[Add your YouTube link here]**
+👉 **https://youtu.be/d7gGaG1Sz48**
 
 The video includes:
 
@@ -218,9 +210,6 @@ IT Student – Software Development
 
 This project is for educational purposes only.
 
-
-## Video presetantion
-https://youtu.be/d7gGaG1Sz48
 
 ## Screenshots
 
