@@ -221,3 +221,13 @@ This project is for educational purposes only.
 
 ## Video presetantion
 https://youtu.be/d7gGaG1Sz48
+
+## Screenshots
+
+
+
+<img width="335" height="765" alt="image" src="https://github.com/user-attachments/assets/74d99643-d7af-4427-b7d8-d9d709b8728a" />
+
+<img width="419" height="778" alt="image" src="https://github.com/user-attachments/assets/7f1f4351-3791-45e6-94e0-eabebf4a9583" />
+
+<img width="433" height="746" alt="image" src="https://github.com/user-attachments/assets/4686e4e7-7139-4685-9369-6e80b8eeba1e" />
