@@ -118,7 +118,7 @@ Automated build testing is implemented using **GitHub Actions**.
 1. Clone the repository:
 
 ```
-git clone https://github.com/your-username/cashflow-pro.git
+git@github.com:jBlack-MC/CashflowPro.git
 ```
 
 2. Open in Android Studio
