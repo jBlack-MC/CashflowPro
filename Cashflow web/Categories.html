@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Cashflow Pro – Categories</title>
+  <style>
+    /* ----- RESET & GLOBAL (Material Design inspired) ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #eef2f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: 'Roboto', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+      padding: 12px;
+    }
+
+    /* mobile-first container (max width 400px) */
+    .phone-frame {
+      max-width: 400px;
+      width: 100%;
+      margin: 0 auto;
+      background-color: #f9fbfd;
+      box-shadow: 0 20px 35px -8px rgba(0,30,60,0.15), 0 5px 12px rgba(0,0,0,0.05);
+      border-radius: 36px 36px 28px 28px;
+      overflow: hidden;
+    }
+
+    /* main screen content */
+    .categories-screen {
+      padding: 28px 20px 40px 20px;
+      display: flex;
+      flex-direction: column;
+      background-color: #ffffff;
+    }
+
+    /* ----- LOGO (top of every screen) ----- */
+    .logo-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #0a2540;  /* primary dark blue */
+      padding: 10px 24px;
+      border-radius: 44px;
+      box-shadow: 0 6px 12px rgba(10,37,64,0.12);
+    }
+
+    .logo-icon {
+      background-color: #2ecc71; /* green accent */
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 20px;
+      box-shadow: inset 0 -2px 3px rgba(0,0,0,0.1);
+    }
+
+    .logo-text {
+      color: white;
+      font-weight: 600;
+      font-size: 1.45rem;
+      letter-spacing: 0.4px;
+    }
+
+    /* screen title */
+    .screen-title {
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: #0a2540;
+      margin-bottom: 24px;
+      letter-spacing: -0.2px;
+    }
+
+    /* category list container */
+    .categories-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    /* category card */
+    .category-card {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 20px 20px 16px 20px;
+      box-shadow: 0 12px 24px -10px rgba(10,37,64,0.12), 0 4px 8px rgba(0,0,0,0.02);
+      border: 1px solid rgba(10,37,64,0.05);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .category-name {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .category-name h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #0a2540;
+    }
+
+    .category-icon {
+      font-size: 1.4rem;
+    }
+
+    .budget-info {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+      background: #f1f6fa;
+      padding: 6px 14px;
+      border-radius: 40px;
+    }
+
+    .budget-label {
+      font-size: 0.85rem;
+      color: #5d738b;
+      font-weight: 500;
+    }
+
+    .budget-value {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #0a2540;
+    }
+
+    .budget-period {
+      font-size: 0.8rem;
+      color: #7f95af;
+    }
+
+    /* spending progress (optional micro info) */
+    .spending-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      font-size: 0.9rem;
+    }
+
+    .spent-amount {
+      color: #c73b3b; /* warning red for overspent example */
+      font-weight: 600;
+    }
+
+    .spent-amount.green {
+      color: #2ecc71; /* green for on track */
+    }
+
+    .micro-progress {
+      width: 100px;
+      height: 6px;
+      background: #e0e9f2;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .micro-fill {
+      height: 100%;
+      background: #0a2540;
+      border-radius: 20px;
+    }
+
+    /* action buttons for edit/delete */
+    .category-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: flex-end;
+      border-top: 1px solid #edf2f7;
+      padding-top: 14px;
+      margin-top: 4px;
+    }
+
+    .action-btn {
+      background: transparent;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: default;  /* UI only */
+      transition: background 0.1s;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .action-btn.edit {
+      background: #f1f6fa;
+      color: #0a2540;
+      border: 1px solid rgba(10,37,64,0.1);
+    }
+
+    .action-btn.delete {
+      background: #ffeae8;
+      color: #c73b3b;
+      border: 1px solid rgba(199,59,59,0.15);
+    }
+
+    .action-btn .icon-symbol {
+      font-size: 1rem;
+    }
+
+    /* add category button */
+    .btn-primary {
+      background: #0a2540;
+      border: none;
+      width: 100%;
+      padding: 18px 24px;
+      border-radius: 60px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: white;
+      letter-spacing: 0.5px;
+      box-shadow: 0 14px 26px -8px rgba(10,37,64,0.4), 0 4px 10px rgba(0,0,0,0.1);
+      cursor: default;
+      margin: 16px 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    /* sample hints (green/red summary) */
+    .summary-hints {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin: 10px 0 0;
+    }
+
+    .hint-success {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: #e2f7e9;
+      color: #1d8844;
+      padding: 6px 18px;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .hint-warning {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: #ffeae8;
+      color: #c73b3b;
+      padding: 6px 18px;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .icon-symbol {
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+
+    /* demo footer */
+    .demo-footer {
+      text-align: center;
+      margin-top: 24px;
+      color: #a7b8c9;
+      font-size: 0.8rem;
+      font-weight: 400;
+    }
+
+    /* soft shadows */
+    .category-card, .btn-primary, .action-btn {
+      box-shadow: 0 6px 12px -6px rgba(10,37,64,0.08);
+    }
+  </style>
+</head>
+<body>
+  <!-- mobile frame -->
+  <div class="phone-frame">
+    <!-- categories screen content -->
+    <div class="categories-screen">
+
+      <!-- Cashflow Pro logo at the top -->
+      <div class="logo-wrapper">
+        <div class="logo">
+          <div class="logo-icon">$</div>
+          <span class="logo-text">Cashflow Pro</span>
+        </div>
+      </div>
+
+      <!-- title -->
+      <div class="screen-title">Categories</div>
+
+      <!-- list of categories (cards) -->
+      <div class="categories-list">
+
+        <!-- 1. Groceries card (on track - green) -->
+        <div class="category-card">
+          <div class="category-header">
+            <div class="category-name">
+              <span class="category-icon">🛒</span>
+              <h3>Groceries</h3>
+            </div>
+            <div class="budget-info">
+              <span class="budget-label">Budget</span>
+              <span class="budget-value">R1,500</span>
+              <span class="budget-period">/mo</span>
+            </div>
+          </div>
+          <div class="spending-row">
+            <span class="spent-amount green">Spent R1,200</span>
+            <div class="micro-progress">
+              <div class="micro-fill" style="width: 80%;"></div>
+            </div>
+          </div>
+          <!-- edit / delete options -->
+          <div class="category-actions">
+            <button class="action-btn edit"><span class="icon-symbol">✎</span> Edit</button>
+            <button class="action-btn delete"><span class="icon-symbol">🗑️</span> Delete</button>
+          </div>
+        </div>
+
+        <!-- 2. Transport card (on track - green) -->
+        <div class="category-card">
+          <div class="category-header">
+            <div class="category-name">
+              <span class="category-icon">🚗</span>
+              <h3>Transport</h3>
+            </div>
+            <div class="budget-info">
+              <span class="budget-label">Budget</span>
+              <span class="budget-value">R800</span>
+              <span class="budget-period">/mo</span>
+            </div>
+          </div>
+          <div class="spending-row">
+            <span class="spent-amount green">Spent R650</span>
+            <div class="micro-progress">
+              <div class="micro-fill" style="width: 81%;"></div>
+            </div>
+          </div>
+          <div class="category-actions">
+            <button class="action-btn edit"><span class="icon-symbol">✎</span> Edit</button>
+            <button class="action-btn delete"><span class="icon-symbol">🗑️</span> Delete</button>
+          </div>
+        </div>
+
+        <!-- 3. Entertainment card (overspending - warning red) -->
+        <div class="category-card">
+          <div class="category-header">
+            <div class="category-name">
+              <span class="category-icon">🍿</span>
+              <h3>Entertainment</h3>
+            </div>
+            <div class="budget-info">
+              <span class="budget-label">Budget</span>
+              <span class="budget-value">R900</span>
+              <span class="budget-period">/mo</span>
+            </div>
+          </div>
+          <div class="spending-row">
+            <span class="spent-amount">Spent R1,350</span>
+            <div class="micro-progress">
+              <div class="micro-fill" style="width: 100%; background-color: #c73b3b;"></div>
+            </div>
+          </div>
+          <div class="category-actions">
+            <button class="action-btn edit"><span class="icon-symbol">✎</span> Edit</button>
+            <button class="action-btn delete"><span class="icon-symbol">🗑️</span> Delete</button>
+          </div>
+        </div>
+      </div> <!-- end categories list -->
+
+      <!-- add category button -->
+      <button class="btn-primary">
+        <span class="icon-symbol">+</span> Add Category
+      </button>
+
+      <!-- sample summary (green/red hints) -->
+      <div class="summary-hints">
+        <span class="hint-success">
+          <span class="icon-symbol">✓</span> 2 categories on track
+        </span>
+        <span class="hint-warning">
+          <span class="icon-symbol">!</span> 1 overspent
+        </span>
+      </div>
+
+      <!-- subtle demo footer -->
+      <div class="demo-footer">
+        Monthly budgets • swipe to edit/delete
+      </div>
+    </div> <!-- end categories-screen -->
+  </div> <!-- end phone-frame -->
+
+  <!-- design comments:
+    - Primary dark blue: #0a2540 (logo, budget values, progress fill, edit button bg)
+    - Accent green: #2ecc71 (logo icon, green spent amounts, success hint)
+    - Warning red: #c73b3b (overspent amount, delete button, warning hint)
+    - Background: soft white with light gray body
+    - Category cards with soft shadows, rounded corners, clean layout
+    - Each card shows name, budget, spending, and edit/delete buttons
+    - Minimal icons: category emoji, edit, delete, plus
+    - Logo at top as required
+    - Sample data shows realistic budget limits and spending
+    - Mobile-first, max-width 400px, simple and professional
+  -->
+</body>
+</html>

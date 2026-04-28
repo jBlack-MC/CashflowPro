@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Cashflow Pro – Dashboard</title>
+  <style>
+    /* ----- RESET & GLOBAL (Material Design inspired) ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #eef2f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: 'Roboto', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+      padding: 12px;
+    }
+
+    /* mobile-first container (max width 400px) */
+    .phone-frame {
+      max-width: 400px;
+      width: 100%;
+      margin: 0 auto;
+      background-color: #f9fbfd;
+      box-shadow: 0 20px 35px -8px rgba(0,30,60,0.15), 0 5px 12px rgba(0,0,0,0.05);
+      border-radius: 36px 36px 28px 28px;
+      overflow: hidden;
+    }
+
+    /* main screen content */
+    .dashboard-screen {
+      padding: 28px 20px 36px 20px;
+      display: flex;
+      flex-direction: column;
+      background-color: #ffffff;
+    }
+
+    /* ----- LOGO (top of every screen) ----- */
+    .logo-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #0a2540;  /* primary dark blue */
+      padding: 10px 24px;
+      border-radius: 44px;
+      box-shadow: 0 6px 12px rgba(10,37,64,0.12);
+    }
+
+    .logo-icon {
+      background-color: #2ecc71; /* green accent */
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 20px;
+      box-shadow: inset 0 -2px 3px rgba(0,0,0,0.1);
+    }
+
+    .logo-text {
+      color: white;
+      font-weight: 600;
+      font-size: 1.45rem;
+      letter-spacing: 0.4px;
+    }
+
+    /* screen title */
+    .screen-title {
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: #0a2540;
+      margin-bottom: 24px;
+      letter-spacing: -0.2px;
+    }
+
+    /* summary cards row (total budget, spent, remaining) */
+    .summary-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .summary-card {
+      flex: 1 1 0;
+      min-width: 100px;
+      background: #f5f9ff;
+      border-radius: 24px;
+      padding: 16px 8px;
+      box-shadow: 0 8px 18px -6px rgba(0,40,80,0.1), 0 2px 4px rgba(0,0,0,0.02);
+      border: 1px solid rgba(10,37,64,0.03);
+      text-align: center;
+    }
+
+    .summary-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #5d738b;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      margin-bottom: 6px;
+    }
+
+    .summary-value {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #0a2540;
+    }
+
+    .summary-value small {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: #7b8fa8;
+    }
+
+    /* remaining budget special (green) */
+    .remaining-card .summary-value {
+      color: #2ecc71;
+    }
+
+    /* progress bar section */
+    .progress-section {
+      background: #f5f9ff;
+      border-radius: 28px;
+      padding: 20px 18px;
+      margin-bottom: 28px;
+      box-shadow: 0 8px 18px -6px rgba(0,40,80,0.08);
+      border: 1px solid rgba(10,37,64,0.03);
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #3a4e66;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 14px;
+      background: #e0e9f2;
+      border-radius: 40px;
+      overflow: hidden;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .progress-fill {
+      width: 64%; /* R3200 / R5000 = 64% */
+      height: 100%;
+      background: #0a2540; /* primary */
+      border-radius: 40px;
+      box-shadow: 0 0 0 2px rgba(46,204,113,0.2);
+      position: relative;
+    }
+
+    .progress-stats {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #5d738b;
+    }
+
+    .used {
+      color: #c73b3b; /* warning red if near limit, but we use for demo */
+      font-weight: 600;
+    }
+
+    .left {
+      color: #2ecc71;
+      font-weight: 600;
+    }
+
+    /* category cards title */
+    .category-title {
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #0a2540;
+      margin: 16px 0 12px 0;
+    }
+
+    .category-grid {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .category-card {
+      flex: 1 1 0;
+      min-width: 100px;
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 18px 8px;
+      box-shadow: 0 12px 24px -10px rgba(10,37,64,0.12), 0 4px 8px rgba(0,0,0,0.02);
+      border: 1px solid rgba(0,0,0,0.02);
+      text-align: center;
+    }
+
+    .category-name {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #0a2540;
+      margin-bottom: 8px;
+    }
+
+    .category-amount {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1e2f40;
+    }
+
+    .category-budget {
+      font-size: 0.75rem;
+      color: #7f95af;
+      margin-top: 6px;
+    }
+
+    .status-badge {
+      display: inline-block;
+      background: #e2f7e9;
+      color: #1d8844;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 30px;
+      margin-top: 8px;
+    }
+
+    .status-badge.warning {
+      background: #ffeae8;
+      color: #c73b3b;
+    }
+
+    /* action buttons row */
+    .action-buttons {
+      display: flex;
+      gap: 12px;
+      margin: 24px 0 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary, .btn-outline {
+      flex: 1 1 0;
+      padding: 16px 10px;
+      border-radius: 60px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-align: center;
+      cursor: default;  /* UI only, no interaction */
+      border: none;
+      background: none;
+      transition: all 0.1s;
+      box-shadow: 0 8px 16px -6px rgba(0,0,0,0.1);
+    }
+
+    .btn-primary {
+      background: #0a2540;
+      color: white;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .btn-outline {
+      background: white;
+      color: #0a2540;
+      border: 1.5px solid #0a2540;
+      box-shadow: 0 6px 12px -6px rgba(10,37,64,0.2);
+    }
+
+    /* tiny icons inside buttons (optional) */
+    .icon-symbol {
+      font-size: 1.1rem;
+      margin-right: 4px;
+    }
+
+    /* footer hint */
+    .demo-note {
+      text-align: center;
+      margin-top: 28px;
+      color: #a7b8c9;
+      font-size: 0.8rem;
+      font-weight: 400;
+    }
+
+    /* soft shadows & consistency */
+    .summary-card, .progress-section, .category-card, .btn-primary, .btn-outline {
+      box-shadow: 0 8px 18px -8px rgba(10,37,64,0.08);
+    }
+  </style>
+</head>
+<body>
+  <!-- mobile frame -->
+  <div class="phone-frame">
+    <!-- dashboard screen content -->
+    <div class="dashboard-screen">
+
+      <!-- Cashflow Pro logo at the top -->
+      <div class="logo-wrapper">
+        <div class="logo">
+          <div class="logo-icon">$</div>
+          <span class="logo-text">Cashflow Pro</span>
+        </div>
+      </div>
+
+      <!-- title -->
+      <div class="screen-title">Dashboard</div>
+
+      <!-- summary cards: total budget, spent, remaining -->
+      <div class="summary-row">
+        <div class="summary-card">
+          <div class="summary-label">Total budget</div>
+          <div class="summary-value">R5,000</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-label">Spent</div>
+          <div class="summary-value">R3,200</div>
+        </div>
+        <div class="summary-card remaining-card">
+          <div class="summary-label">Remaining</div>
+          <div class="summary-value">R1,800</div>
+        </div>
+      </div>
+
+      <!-- progress bar with budget usage -->
+      <div class="progress-section">
+        <div class="progress-header">
+          <span>Budget used</span>
+          <span class="used">R3,200</span>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-fill" style="width: 64%;"></div>
+        </div>
+        <div class="progress-stats">
+          <span class="left">✓ R1,800 left</span>
+          <span>64% used</span>
+        </div>
+      </div>
+
+      <!-- category summary cards -->
+      <div class="category-title">Spending by category</div>
+      <div class="category-grid">
+        <!-- groceries card (green - on track) -->
+        <div class="category-card">
+          <div class="category-name">🍞 Groceries</div>
+          <div class="category-amount">R1,200</div>
+          <div class="category-budget">of R1,500</div>
+          <span class="status-badge">✓ on track</span>
+        </div>
+        <!-- transport card (green) -->
+        <div class="category-card">
+          <div class="category-name">🚗 Transport</div>
+          <div class="category-amount">R650</div>
+          <div class="category-budget">of R800</div>
+          <span class="status-badge">✓ good</span>
+        </div>
+        <!-- entertainment card (warning - overspend) -->
+        <div class="category-card">
+          <div class="category-name">🍿 Entertainment</div>
+          <div class="category-amount">R1,350</div>
+          <div class="category-budget">of R900</div>
+          <span class="status-badge warning">⚠ +50%</span>
+        </div>
+      </div>
+
+      <!-- action buttons: add expense, view history, view graphs -->
+      <div class="action-buttons">
+        <button class="btn-primary" aria-label="add expense"><span class="icon-symbol">+</span> Add</button>
+        <button class="btn-outline" aria-label="history"><span class="icon-symbol">📋</span> History</button>
+        <button class="btn-outline" aria-label="graphs"><span class="icon-symbol">📊</span> Graphs</button>
+      </div>
+
+      <!-- subtle footer / sample data note -->
+      <div class="demo-note">
+        Last updated: today • R5,000 monthly budget
+      </div>
+    </div> <!-- end dashboard-screen -->
+  </div> <!-- end phone-frame -->
+
+  <!-- design comments:
+    - Primary dark blue: #0a2540 (logo, progress fill, buttons, title)
+    - Accent green: #2ecc71 (remaining value, left indicator, success badges)
+    - Warning red: #c73b3b (used text, warning badge)
+    - Background: soft white with light gray body
+    - All cards, progress bar, buttons have soft shadows & rounded corners
+    - Minimal icons: $, check, warning, small category emoji (optional)
+    - Logo at top as required
+    - Sample data: R5000 total, R3200 spent, categories with status
+    - Mobile-first, max-width 400px, clean and structured
+  -->
+</body>
+</html>

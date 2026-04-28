@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Cashflow Pro – Register</title>
+  <style>
+    /* ----- RESET & GLOBAL (Material Design inspired) ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #eef2f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: 'Roboto', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+      padding: 12px;
+    }
+
+    /* mobile-first container (max width 400px) */
+    .phone-frame {
+      max-width: 400px;
+      width: 100%;
+      margin: 0 auto;
+      background-color: #f9fbfd;
+      box-shadow: 0 20px 35px -8px rgba(0,30,60,0.15), 0 5px 12px rgba(0,0,0,0.05);
+      border-radius: 36px 36px 28px 28px;
+      overflow: hidden;
+    }
+
+    /* main screen content */
+    .register-screen {
+      padding: 28px 24px 40px 24px;
+      display: flex;
+      flex-direction: column;
+      background-color: #ffffff;
+    }
+
+    /* ----- LOGO (top of every screen) ----- */
+    .logo-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #0a2540;  /* primary dark blue */
+      padding: 10px 24px;
+      border-radius: 44px;
+      box-shadow: 0 6px 12px rgba(10,37,64,0.12);
+    }
+
+    .logo-icon {
+      background-color: #2ecc71; /* green accent */
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 20px;
+      box-shadow: inset 0 -2px 3px rgba(0,0,0,0.1);
+    }
+
+    .logo-text {
+      color: white;
+      font-weight: 600;
+      font-size: 1.45rem;
+      letter-spacing: 0.4px;
+    }
+
+    /* title */
+    .screen-title {
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: #0a2540;
+      margin-bottom: 20px;
+      letter-spacing: -0.2px;
+    }
+
+    /* card-based layout */
+    .register-card {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 24px 20px;
+      box-shadow: 0 12px 28px -8px rgba(0,40,80,0.12), 0 4px 8px rgba(0,0,0,0.02);
+      border: 1px solid rgba(10,37,64,0.05);
+      margin-bottom: 16px;
+      width: 100%;
+    }
+
+    /* input fields */
+    .input-field {
+      margin-bottom: 20px;
+      width: 100%;
+    }
+
+    .input-label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #3a4e66;
+      margin-bottom: 6px;
+      margin-left: 8px;
+    }
+
+    .input-wrapper {
+      display: flex;
+      align-items: center;
+      background: #f1f6fa;
+      border-radius: 50px;
+      padding: 4px 20px;
+      border: 1.5px solid transparent;
+      transition: border 0.2s, background 0.2s;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .input-wrapper:focus-within {
+      border-color: #0a2540;
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(10,37,64,0.1);
+    }
+
+    .input-icon {
+      color: #6b7f96;
+      margin-right: 10px;
+      font-size: 1.2rem;
+      opacity: 0.8;
+    }
+
+    .input-wrapper input {
+      width: 100%;
+      border: none;
+      background: transparent;
+      padding: 16px 0;
+      font-size: 1rem;
+      font-family: inherit;
+      outline: none;
+      color: #1a2b3e;
+    }
+
+    .input-wrapper input::placeholder {
+      color: #9aafc4;
+      font-weight: 400;
+      font-size: 0.95rem;
+    }
+
+    /* register button (primary) */
+    .btn-primary {
+      background: #0a2540;
+      border: none;
+      width: 100%;
+      padding: 18px 24px;
+      border-radius: 60px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: white;
+      letter-spacing: 0.5px;
+      box-shadow: 0 12px 24px -8px rgba(10,37,64,0.4), 0 4px 8px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+      margin-top: 8px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .btn-primary:hover {
+      background: #123656;
+      box-shadow: 0 16px 28px -8px rgba(10,37,64,0.5);
+    }
+
+    .btn-primary:active {
+      transform: scale(0.98);
+      box-shadow: 0 8px 16px -6px rgba(10,37,64,0.4);
+    }
+
+    /* link to login screen */
+    .login-link {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .login-link a {
+      color: #0a2540;
+      text-decoration: none;
+      font-weight: 600;
+      border-bottom: 2px dotted #2ecc71;
+      padding-bottom: 2px;
+      transition: color 0.2s;
+    }
+
+    .login-link a:hover {
+      color: #2ecc71;
+    }
+
+    /* sample data: budget summary (green/red hints) */
+    .budget-hints {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .hint-success {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: #e2f7e9;
+      color: #1d8844;
+      padding: 6px 16px;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .hint-warning {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: #ffeae8;
+      color: #c73b3b;
+      padding: 6px 16px;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .icon-symbol {
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+
+    /* soft shadows & rounding */
+    .register-card, .btn-primary, .input-wrapper, .logo {
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    }
+
+    /* hint small note for demo */
+    .demo-note {
+      text-align: center;
+      margin-top: 16px;
+      color: #a7b8c9;
+      font-size: 0.8rem;
+      font-weight: 400;
+    }
+  </style>
+</head>
+<body>
+  <!-- mobile frame -->
+  <div class="phone-frame">
+    <!-- register screen content -->
+    <div class="register-screen">
+
+      <!-- Cashflow Pro logo at the top -->
+      <div class="logo-wrapper">
+        <div class="logo">
+          <div class="logo-icon">$</div>
+          <span class="logo-text">Cashflow Pro</span>
+        </div>
+      </div>
+
+      <!-- title -->
+      <div class="screen-title">Register</div>
+
+      <!-- card based layout for inputs -->
+      <div class="register-card">
+        <!-- username field -->
+        <div class="input-field">
+          <span class="input-label">Username</span>
+          <div class="input-wrapper">
+            <span class="input-icon">👤</span>
+            <input type="text" placeholder="Choose a username" value="cashflow_user" readonly>
+          </div>
+        </div>
+
+        <!-- email field -->
+        <div class="input-field">
+          <span class="input-label">Email</span>
+          <div class="input-wrapper">
+            <span class="input-icon">📧</span>
+            <input type="email" placeholder="your@email.com" value="demo@cashflow.pro" readonly>
+          </div>
+        </div>
+
+        <!-- password field -->
+        <div class="input-field">
+          <span class="input-label">Password</span>
+          <div class="input-wrapper">
+            <span class="input-icon">🔒</span>
+            <input type="password" placeholder="Create a password" value="password123" readonly>
+          </div>
+        </div>
+
+        <!-- confirm password field -->
+        <div class="input-field">
+          <span class="input-label">Confirm Password</span>
+          <div class="input-wrapper">
+            <span class="input-icon">✓</span>
+            <input type="password" placeholder="Re-enter password" value="password123" readonly>
+          </div>
+        </div>
+
+        <!-- register button (primary) -->
+        <button class="btn-primary">Create account</button>
+
+        <!-- link to login screen -->
+        <div class="login-link">
+          <a href="#">Already have an account? Login</a>
+        </div>
+      </div> <!-- end register card -->
+
+      <!-- sample data: success & warning budget hints -->
+      <div class="budget-hints">
+        <span class="hint-success">
+          <span class="icon-symbol">✓</span> $2,450 left
+        </span>
+        <span class="hint-warning">
+          <span class="icon-symbol">!</span> Dining +12%
+        </span>
+      </div>
+
+      <!-- subtle demo footer -->
+      <div class="demo-note">
+        Join 50k+ smart budgeters
+      </div>
+    </div> <!-- end register-screen -->
+  </div> <!-- end phone-frame -->
+
+  <!-- design comments:
+    - Primary dark blue: #0a2540 (logo, button, title, focus rings)
+    - Accent green: #2ecc71 (logo icon, success background, link underline)
+    - Warning red: #c73b3b (background in warning hint)
+    - Background: clean white with light gray body
+    - Cards, inputs, buttons have soft shadows and rounded corners
+    - Minimal icons: user, email, lock, check, success/warning symbols
+    - Logo at top on every screen (as requested)
+    - Sample data shows green/red budget hints
+    - Mobile-first with max-width 400px
+    - No backend, UI only, pre-filled sample fields
+  -->
+</body>
+</html>

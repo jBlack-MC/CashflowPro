@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Cashflow Pro – Reports</title>
+  <style>
+    /* ----- RESET & GLOBAL (Material Design inspired) ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #eef2f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: 'Roboto', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+      padding: 12px;
+    }
+
+    /* mobile-first container (max width 400px) */
+    .phone-frame {
+      max-width: 400px;
+      width: 100%;
+      margin: 0 auto;
+      background-color: #f9fbfd;
+      box-shadow: 0 20px 35px -8px rgba(0,30,60,0.15), 0 5px 12px rgba(0,0,0,0.05);
+      border-radius: 36px 36px 28px 28px;
+      overflow: hidden;
+    }
+
+    /* main screen content */
+    .reports-screen {
+      padding: 28px 20px 40px 20px;
+      display: flex;
+      flex-direction: column;
+      background-color: #ffffff;
+    }
+
+    /* ----- LOGO (top of every screen) ----- */
+    .logo-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #0a2540;  /* primary dark blue */
+      padding: 10px 24px;
+      border-radius: 44px;
+      box-shadow: 0 6px 12px rgba(10,37,64,0.12);
+    }
+
+    .logo-icon {
+      background-color: #2ecc71; /* green accent */
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 20px;
+      box-shadow: inset 0 -2px 3px rgba(0,0,0,0.1);
+    }
+
+    .logo-text {
+      color: white;
+      font-weight: 600;
+      font-size: 1.45rem;
+      letter-spacing: 0.4px;
+    }
+
+    /* screen title */
+    .screen-title {
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: #0a2540;
+      margin-bottom: 24px;
+      letter-spacing: -0.2px;
+    }
+
+    /* period selector chips */
+    .period-selector {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 24px;
+      justify-content: center;
+    }
+
+    .period-chip {
+      background: #f1f6fa;
+      padding: 10px 22px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: #3a4e66;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.02);
+      border: 1px solid transparent;
+    }
+
+    .period-chip.active {
+      background: #0a2540;
+      color: white;
+      box-shadow: 0 8px 14px -6px rgba(10,37,64,0.4);
+    }
+
+    /* summary cards row */
+    .summary-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .summary-card {
+      flex: 1;
+      background: #f5f9ff;
+      border-radius: 24px;
+      padding: 16px 8px;
+      box-shadow: 0 8px 18px -6px rgba(0,40,80,0.1);
+      border: 1px solid rgba(10,37,64,0.03);
+      text-align: center;
+    }
+
+    .summary-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #5d738b;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      margin-bottom: 6px;
+    }
+
+    .summary-value {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #0a2540;
+    }
+
+    .summary-value.small {
+      font-size: 1.2rem;
+    }
+
+    .trend-up {
+      color: #c73b3b;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .trend-down {
+      color: #2ecc71;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    /* chart card (simulated bar chart) */
+    .chart-card {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 22px 20px;
+      box-shadow: 0 12px 24px -10px rgba(10,37,64,0.12);
+      border: 1px solid rgba(10,37,64,0.05);
+      margin-bottom: 28px;
+    }
+
+    .chart-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #0a2540;
+      margin-bottom: 20px;
+    }
+
+    .bar-container {
+      display: flex;
+      align-items: flex-end;
+      gap: 20px;
+      justify-content: space-around;
+      margin-bottom: 10px;
+    }
+
+    .bar-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .bar-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #3a4e66;
+    }
+
+    .bar {
+      width: 100%;
+      height: 120px;
+      display: flex;
+      flex-direction: column-reverse;
+      background: #e9eff6;
+      border-radius: 20px 20px 8px 8px;
+      overflow: hidden;
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .bar-fill {
+      width: 100%;
+      background: #0a2540;
+      border-radius: 8px 8px 0 0;
+      transition: height 0.2s;
+    }
+
+    .bar-fill.green {
+      background: #2ecc71;
+    }
+
+    .bar-fill.red {
+      background: #c73b3b;
+    }
+
+    .bar-value {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #1a2b3e;
+    }
+
+    /* category breakdown */
+    .breakdown-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #0a2540;
+      margin: 8px 0 16px 0;
+    }
+
+    .category-breakdown {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .category-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #f8fafd;
+      padding: 12px 18px;
+      border-radius: 50px;
+      border: 1px solid #e9eef4;
+    }
+
+    .cat-icon {
+      font-size: 1.3rem;
+      min-width: 36px;
+      text-align: center;
+    }
+
+    .cat-details {
+      flex: 1;
+    }
+
+    .cat-name {
+      font-weight: 600;
+      color: #0a2540;
+      font-size: 1rem;
+    }
+
+    .cat-stats {
+      display: flex;
+      gap: 12px;
+      font-size: 0.85rem;
+      color: #5d738b;
+      margin-top: 2px;
+    }
+
+    .cat-amount {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #0a2540;
+      min-width: 70px;
+      text-align: right;
+    }
+
+    .cat-change {
+      font-size: 0.9rem;
+      font-weight: 600;
+      min-width: 55px;
+      text-align: right;
+    }
+
+    .change-positive {
+      color: #c73b3b;
+    }
+
+    .change-negative {
+      color: #2ecc71;
+    }
+
+    /* view full report button */
+    .btn-outline {
+      background: white;
+      border: 1.5px solid #0a2540;
+      width: 100%;
+      padding: 18px 24px;
+      border-radius: 60px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #0a2540;
+      box-shadow: 0 8px 18px -6px rgba(10,37,64,0.2);
+      cursor: default;
+      margin: 8px 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    /* hints */
+    .hints-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin: 16px 0 0;
+    }
+
+    .hint-success {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: #e2f7e9;
+      color: #1d8844;
+      padding: 6px 18px;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .hint-warning {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: #ffeae8;
+      color: #c73b3b;
+      padding: 6px 18px;
+      border-radius: 40px;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+
+    .icon-symbol {
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+
+    .demo-footer {
+      text-align: center;
+      margin-top: 20px;
+      color: #a7b8c9;
+      font-size: 0.8rem;
+      font-weight: 400;
+    }
+  </style>
+</head>
+<body>
+  <!-- mobile frame -->
+  <div class="phone-frame">
+    <!-- reports screen content -->
+    <div class="reports-screen">
+
+      <!-- Cashflow Pro logo at the top -->
+      <div class="logo-wrapper">
+        <div class="logo">
+          <div class="logo-icon">$</div>
+          <span class="logo-text">Cashflow Pro</span>
+        </div>
+      </div>
+
+      <!-- title -->
+      <div class="screen-title">Reports</div>
+
+      <!-- period selector -->
+      <div class="period-selector">
+        <span class="period-chip">Week</span>
+        <span class="period-chip active">Month</span>
+        <span class="period-chip">Year</span>
+      </div>
+
+      <!-- summary cards -->
+      <div class="summary-row">
+        <div class="summary-card">
+          <div class="summary-label">Income</div>
+          <div class="summary-value">R8,400</div>
+          <span class="trend-down">↓ 2%</span>
+        </div>
+        <div class="summary-card">
+          <div class="summary-label">Expenses</div>
+          <div class="summary-value">R5,280</div>
+          <span class="trend-up">↑ 8%</span>
+        </div>
+        <div class="summary-card">
+          <div class="summary-label">Savings</div>
+          <div class="summary-value">R3,120</div>
+          <span class="trend-down">↓ 5%</span>
+        </div>
+      </div>
+
+      <!-- chart card (simulated spending by category) -->
+      <div class="chart-card">
+        <div class="chart-title">Spending by Category</div>
+        <div class="bar-container">
+          <div class="bar-item">
+            <span class="bar-label">🛒</span>
+            <div class="bar">
+              <div class="bar-fill" style="height: 80%"></div>
+            </div>
+            <span class="bar-value">R1,200</span>
+          </div>
+          <div class="bar-item">
+            <span class="bar-label">🚗</span>
+            <div class="bar">
+              <div class="bar-fill green" style="height: 65%"></div>
+            </div>
+            <span class="bar-value">R650</span>
+          </div>
+          <div class="bar-item">
+            <span class="bar-label">🍿</span>
+            <div class="bar">
+              <div class="bar-fill red" style="height: 100%"></div>
+            </div>
+            <span class="bar-value">R1,350</span>
+          </div>
+          <div class="bar-item">
+            <span class="bar-label">🍽️</span>
+            <div class="bar">
+              <div class="bar-fill" style="height: 45%"></div>
+            </div>
+            <span class="bar-value">R480</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- category breakdown -->
+      <div class="breakdown-title">Category Breakdown</div>
+      <div class="category-breakdown">
+        <!-- groceries -->
+        <div class="category-row">
+          <span class="cat-icon">🛒</span>
+          <div class="cat-details">
+            <div class="cat-name">Groceries</div>
+            <div class="cat-stats">
+              <span>Budget R1,500</span>
+              <span>80% used</span>
+            </div>
+          </div>
+          <div class="cat-amount">R1,200</div>
+          <div class="cat-change change-negative">-3%</div>
+        </div>
+        <!-- transport -->
+        <div class="category-row">
+          <span class="cat-icon">🚗</span>
+          <div class="cat-details">
+            <div class="cat-name">Transport</div>
+            <div class="cat-stats">
+              <span>Budget R800</span>
+              <span>81% used</span>
+            </div>
+          </div>
+          <div class="cat-amount">R650</div>
+          <div class="cat-change change-negative">-5%</div>
+        </div>
+        <!-- entertainment (overspent) -->
+        <div class="category-row">
+          <span class="cat-icon">🍿</span>
+          <div class="cat-details">
+            <div class="cat-name">Entertainment</div>
+            <div class="cat-stats">
+              <span>Budget R900</span>
+              <span class="trend-up">150% used</span>
+            </div>
+          </div>
+          <div class="cat-amount">R1,350</div>
+          <div class="cat-change change-positive">+22%</div>
+        </div>
+        <!-- dining out -->
+        <div class="category-row">
+          <span class="cat-icon">🍽️</span>
+          <div class="cat-details">
+            <div class="cat-name">Dining out</div>
+            <div class="cat-stats">
+              <span>Budget R600</span>
+              <span>80% used</span>
+            </div>
+          </div>
+          <div class="cat-amount">R480</div>
+          <div class="cat-change change-negative">-2%</div>
+        </div>
+      </div>
+
+      <!-- view full report button -->
+      <button class="btn-outline">
+        <span class="icon-symbol">📄</span> View Full Report
+      </button>
+
+      <!-- hints row -->
+      <div class="hints-row">
+        <span class="hint-success">
+          <span class="icon-symbol">✓</span> 3 categories on track
+        </span>
+        <span class="hint-warning">
+          <span class="icon-symbol">!</span> 1 overspent
+        </span>
+      </div>
+
+      <!-- demo footer -->
+      <div class="demo-footer">
+        Based on March 2026 transactions
+      </div>
+    </div> <!-- end reports-screen -->
+  </div> <!-- end phone-frame -->
+
+  <!-- design comments:
+    - Primary dark blue: #0a2540 (logo, active chip, bars, category names, button border)
+    - Accent green: #2ecc71 (logo icon, green bar, negative change, success hint)
+    - Warning red: #c73b3b (red bar, positive change, warning hint, overspent text)
+    - Background: soft white with light gray body
+    - Cards and buttons have soft shadows and rounded corners
+    - Minimal icons: category emojis, chart, document
+    - Logo at top as required
+    - Sample data shows realistic spending patterns
+    - Mobile-first, max-width 400px, clean and professional
+    - No backend, UI only
+  -->
+</body>
+</html>

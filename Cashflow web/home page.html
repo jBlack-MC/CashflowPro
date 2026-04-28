@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Cashflow Pro – splash</title>
+  <style>
+    /* ----- RESET & GLOBAL (material inspired) ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #e9eef2;  /* soft neutral background for outer space */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: 'Roboto', system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+    }
+
+    /* mobile-first card container (max width 400px) */
+    .phone-frame {
+      max-width: 400px;
+      width: 100%;
+      margin: 0 auto;
+      background-color: #f8fafc;  /* light background (soft light) */
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.02);
+      border-radius: 32px 32px 24px 24px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* main screen content – splash layout */
+    .splash-screen {
+      padding: 32px 24px 48px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 640px;  /* comfortable splash height */
+      background-color: #ffffff; /* clean white card base */
+    }
+
+    /* ----- LOGO (top of every screen) ----- */
+    .logo-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #0b2b4f;  /* deep navy blue – primary dark blue */
+      padding: 10px 22px;
+      border-radius: 50px;
+      box-shadow: 0 4px 8px rgba(0,40,80,0.15);
+    }
+
+    .logo-icon {
+      background-color: #2ecc71; /* fresh green accent */
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 18px;
+      box-shadow: inset 0 -1px 2px rgba(0,0,0,0.1);
+    }
+
+    .logo-text {
+      color: white;
+      font-weight: 600;
+      font-size: 1.35rem;
+      letter-spacing: 0.5px;
+    }
+
+    /* tagline style */
+    .tagline {
+      font-size: 1rem;
+      font-weight: 400;
+      color: #4a5a6e;
+      margin-top: 8px;
+      margin-bottom: 40px;
+      border-bottom: 2px dotted #b0c4d9;
+      padding-bottom: 12px;
+    }
+
+    /* centered layout container */
+    .center-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    /* simple progress indicator (dots) */
+    .loading-dots {
+      display: flex;
+      gap: 16px;
+      margin: 48px 0 32px 0;
+    }
+
+    .dot {
+      width: 16px;
+      height: 16px;
+      background-color: #cbd5e1;
+      border-radius: 50%;
+      animation: pulse 1.4s infinite ease-in-out both;
+    }
+
+    .dot:nth-child(1) { animation-delay: -0.32s; background-color: #0b2b4f; } /* primary */
+    .dot:nth-child(2) { animation-delay: -0.16s; background-color: #2ecc71; } /* accent green */
+    .dot:nth-child(3) { background-color: #0b2b4f; } /* primary again */
+
+    @keyframes pulse {
+      0%, 80%, 100% { transform: scale(0.6); opacity: 0.6; }
+      40% { transform: scale(1); opacity: 1; }
+    }
+
+    /* alternative progress bar (subtle) – hidden by default, we use dots, but can be visible */
+    .progress-bar {
+      width: 200px;
+      height: 6px;
+      background: #e2e8f0;
+      border-radius: 12px;
+      margin: 40px 0 20px;
+      overflow: hidden;
+      display: none; /* not using it, but keep code if you want to switch */
+    }
+
+    .progress-fill {
+      width: 70%;
+      height: 100%;
+      background: #0b2b4f;
+      border-radius: 12px;
+    }
+
+    /* extra bottom hint – minimal */
+    .splash-footer {
+      margin-top: 40px;
+      font-size: 0.85rem;
+      color: #94a3b8;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+    }
+
+    /* sample card – but we keep splash minimal, only one optional subtle card to show budget hint */
+    .info-card {
+      background: #f1f5f9;
+      border-radius: 28px;
+      padding: 18px 24px;
+      margin-top: 24px;
+      width: 100%;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.02), 0 2px 4px rgba(0, 30, 60, 0.05);
+      border: 1px solid rgba(255,255,255,0.6);
+      backdrop-filter: blur(2px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .info-card span {
+      font-weight: 500;
+      color: #1e293b;
+    }
+
+    .chip {
+      background: white;
+      border-radius: 30px;
+      padding: 6px 16px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #0b2b4f;
+      box-shadow: 0 2px 6px rgba(0,30,60,0.08);
+    }
+
+    /* no overload, only few icons (optional) – we use none on splash except maybe a tiny icon inside logo */
+    /* Buttons (only one subtle CTA to keep splash simple but interactive‑looking) */
+    .ghost-button {
+      background: transparent;
+      border: 1.5px solid #0b2b4f;
+      border-radius: 40px;
+      padding: 12px 36px;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #0b2b4f;
+      letter-spacing: 0.3px;
+      margin-top: 32px;
+      transition: all 0.2s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.02);
+    }
+
+    .ghost-button:hover {
+      background: #0b2b4f10; /* just a hint */
+    }
+
+    /* consistent spacing */
+    .spacer {
+      height: 20px;
+    }
+
+    /* mock illustration for budget friendly */
+    .budget-note {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #2ecc71;
+      font-weight: 500;
+      background: #e6f7ec;
+      padding: 8px 18px;
+      border-radius: 40px;
+      margin: 16px 0 8px;
+      font-size: 0.95rem;
+    }
+
+    .budget-note.warning {
+      background: #fee9e7;
+      color: #d14545; /* red warning */
+    }
+
+    /* tiny icon inside (optional) – we only use vector-like char */
+    .icon-symbol {
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    /* ensure everything is rounded, clean */
+    button, .card, .logo, .chip {
+      -webkit-tap-highlight-color: transparent;
+    }
+  </style>
+</head>
+<body>
+  <!-- mobile frame -->
+  <div class="phone-frame">
+    <!-- splash screen content -->
+    <div class="splash-screen">
+
+      <!-- logo at the top (cashflow pro logo) -->
+      <div class="logo-wrapper">
+        <div class="logo">
+          <div class="logo-icon">$</div>
+          <span class="logo-text">Cashflow Pro</span>
+        </div>
+      </div>
+
+      <!-- tagline -->
+      <div class="tagline">Smart Budgeting Made Simple</div>
+
+      <!-- centered main content (simple) -->
+      <div class="center-content">
+        <!-- minimalist loading indicator: three dots (material design style) -->
+        <div class="loading-dots">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+
+        <!-- subtle sample data / budget card (to reflect real app, but minimal) -->
+        <div class="info-card">
+          <span>💰 Monthly budget</span>
+          <div class="chip">$2,450 left</div>
+        </div>
+
+        <!-- optional small green indicator to show "on track" (accent green) -->
+        <div class="budget-note">
+          <span class="icon-symbol">✅</span> <span>No overspending</span>
+        </div>
+
+        <!-- we add a very soft red warning note to show "warning color" but not overload -->
+        <div class="budget-note warning">
+          <span class="icon-symbol">⚠️</span> <span>Dining out +12%</span>
+        </div>
+
+        <!-- simple ghost button – just for design (no interaction) -->
+        <button class="ghost-button" aria-label="get started">Get started</button>
+
+        <!-- tiny footer note (loading indicator alternative) -->
+        <div class="splash-footer">loading your dashboard ...</div>
+      </div>
+
+      <!-- we already included loading dots and progress feel, no extra elements -->
+    </div> <!-- end splash screen -->
+  </div> <!-- end phone-frame -->
+
+  <!-- design explanation: 
+    - Primary dark blue: #0b2b4f used in logo, progress dot, button border.
+    - Accent green: #2ecc71 (logo icon, dot, success note).
+    - Warning red: #d14545 (used in background of warning note).
+    - Background soft light: #f8fafc, white card with minimal shadows.
+    - Cards and buttons have soft shadows, border radiuses 24px+.
+    - Only a few icons: dollar sign, check, warning (minimal).
+    - Logo appears at top. Splash screen includes tagline, centered dots.
+    - Sample data shows budget card + green & red warning hints.
+    - No backend, pure UI.
+    - Clean, structured, comments.
+  -->
+</body>
+</html>
