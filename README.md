@@ -8,7 +8,7 @@ This project was developed as part of an academic assignment and focuses on **fu
 
 ---
 
-## 🎯 Features
+ Features
 
 ### 🔐 User Authentication
 
