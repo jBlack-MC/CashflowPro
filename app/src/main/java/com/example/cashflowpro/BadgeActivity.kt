@@ -2,20 +2,18 @@ package com.example.cashflowpro
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.cashflowpro.data.AppDatabase
-import com.example.cashflowpro.data.Badge
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
 class BadgeActivity : AppCompatActivity() {
 
     private lateinit var badgesContainer: LinearLayout
+    private lateinit var tvBadgeCount: TextView
     private val db by lazy { AppDatabase.getDatabase(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +22,7 @@ class BadgeActivity : AppCompatActivity() {
 
         setupToolbar()
         initViews()
-        loadAndProcessBadges()
+        loadBadges()
     }
 
     private fun setupToolbar() {
@@ -34,78 +32,54 @@ class BadgeActivity : AppCompatActivity() {
 
     private fun initViews() {
         badgesContainer = findViewById(R.id.badgesContainer)
+        tvBadgeCount = findViewById(R.id.tvBadgeCount)
     }
 
-    private fun loadAndProcessBadges() {
+    private fun loadBadges() {
         lifecycleScope.launch {
-            val allExpenses = db.expenseDao().getAllExpenses()
-            val savedBadges = db.badgeDao().getAllBadges()
-            
-            val badges = listOf(
-                Badge("beginner_saver", "Beginner Saver", "Logged your first expense!", "🥉", allExpenses.isNotEmpty()),
-                Badge("budget_keeper", "Budget Keeper", "Stayed within budget for 7 days", "🥈", checkBudgetStreak(7)),
-                Badge("financial_master", "Financial Master", "Stayed within budget for 30 days", "🥇", checkBudgetStreak(30)),
-                Badge("consistency_badge", "Consistency Badge", "Added expenses every day for a week", "🔥", checkConsistency(7))
+            val allBadges = listOf(
+                BadgeInfo("First Expense", "Log your first expense", "🥉", true),
+                BadgeInfo("Smart Saver", "Reach 50% of a savings goal", "🥈", true),
+                BadgeInfo("Budget Master", "Stay under budget for a week", "🥇", false),
+                BadgeInfo("High Earner", "Log income over R10,000", "💰", true),
+                BadgeInfo("Goal Getter", "Complete one savings goal", "🎯", false),
+                BadgeInfo("Streak Keeper", "Log expenses for 7 days", "🔥", false)
             )
 
-            // Save newly unlocked badges if not already saved
-            for (badge in badges) {
+            val unlockedCount = allBadges.count { it.isUnlocked }
+            tvBadgeCount.text = "$unlockedCount / ${allBadges.size}"
+
+            badgesContainer.removeAllViews()
+            val inflater = LayoutInflater.from(this@BadgeActivity)
+
+            for (badge in allBadges) {
+                val badgeView = inflater.inflate(R.layout.item_badge, badgesContainer, false)
+                
+                badgeView.findViewById<TextView>(R.id.tvBadgeName).text = badge.name
+                badgeView.findViewById<TextView>(R.id.tvBadgeDescription).text = badge.description
+                badgeView.findViewById<TextView>(R.id.tvBadgeIcon).text = badge.icon
+                
+                val statusText = badgeView.findViewById<TextView>(R.id.tvUnlockDate)
+                val root = badgeView.findViewById<View>(R.id.badgeRoot)
+
                 if (badge.isUnlocked) {
-                    val existing = savedBadges.find { it.id == badge.id }
-                    if (existing == null) {
-                        val unlockDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
-                        db.badgeDao().insertBadge(badge.copy(unlockDate = unlockDate))
-                        android.util.Log.d("Badge", "Badge Unlock: ${badge.name} on $unlockDate")
-                    }
+                    statusText.text = "Unlocked"
+                    root.alpha = 1.0f
+                } else {
+                    statusText.text = "Locked"
+                    statusText.setTextColor(getColor(R.color.text_hint))
+                    root.alpha = 0.5f
                 }
-            }
 
-            val finalSavedBadges = db.badgeDao().getAllBadges()
-            displayBadges(badges, finalSavedBadges)
+                badgesContainer.addView(badgeView)
+            }
         }
     }
 
-    private fun displayBadges(available: List<Badge>, saved: List<Badge>) {
-        badgesContainer.removeAllViews()
-        for (badge in available) {
-            val savedBadge = saved.find { it.id == badge.id }
-            val itemView = LayoutInflater.from(this).inflate(R.layout.item_badge, badgesContainer, false)
-            
-            val tvIcon = itemView.findViewById<TextView>(R.id.tvBadgeIcon)
-            val tvName = itemView.findViewById<TextView>(R.id.tvBadgeName)
-            val tvDesc = itemView.findViewById<TextView>(R.id.tvBadgeDescription)
-            val tvStatus = itemView.findViewById<TextView>(R.id.tvUnlockDate)
-            val root = itemView.findViewById<LinearLayout>(R.id.badgeRoot)
-
-            tvIcon.text = badge.icon
-            tvName.text = badge.name
-            tvDesc.text = badge.description
-            
-            if (savedBadge != null) {
-                root.alpha = 1.0f
-                tvStatus.text = "Unlocked on: ${savedBadge.unlockDate}"
-            } else {
-                root.alpha = 0.5f
-                tvStatus.text = "Locked"
-            }
-            
-            badgesContainer.addView(itemView)
-        }
-    }
-
-    private suspend fun checkBudgetStreak(days: Int): Boolean {
-        // Simple mock logic or complex calculation based on goals vs expenses per day
-        val budget = db.budgetDao().getBudget() ?: return false
-        val expenses = db.expenseDao().getAllExpenses()
-        if (expenses.isEmpty()) return false
-        // For brevity, let's say they unlocked it if they have enough history and total is ok
-        // In a real app, you'd check each day's total vs (monthlyBudget / 30)
-        return expenses.size >= days && (db.expenseDao().getTotalExpenses() ?: 0.0) <= budget.max
-    }
-
-    private suspend fun checkConsistency(days: Int): Boolean {
-        val expenses = db.expenseDao().getAllExpenses()
-        val uniqueDays = expenses.map { it.date }.distinct()
-        return uniqueDays.size >= days
-    }
+    data class BadgeInfo(
+        val name: String,
+        val description: String,
+        val icon: String,
+        val isUnlocked: Boolean
+    )
 }

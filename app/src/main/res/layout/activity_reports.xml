@@ -3,21 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="@color/surface_variant">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/primary">
+        android:background="@color/surface_variant"
+        app:elevation="0dp">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:title="Monthly Report"
-            app:titleTextColor="@color/white"
+            app:titleTextColor="@color/text_primary"
             app:navigationIcon="@android:drawable/ic_menu_revert"
-            app:navigationIconTint="@color/white" />
+            app:navigationIconTint="@color/text_primary"
+            app:titleCentered="true" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -36,7 +38,9 @@
                 style="@style/AppCardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp">
+                android:layout_marginBottom="24dp"
+                app:strokeWidth="0dp"
+                app:cardElevation="2dp">
 
                 <LinearLayout
                     android:id="@+id/reportContent"
@@ -49,7 +53,7 @@
                         android:id="@+id/tvReportMonth"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="October 2026 Summary"
+                        android:text="Financial Summary"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:textColor="@color/primary"
@@ -64,9 +68,10 @@
                             android:id="@+id/tvTotalSpending"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Total Spending: R0.00"
+                            android:text="Total Expenses: R0.00"
                             android:textSize="16sp"
-                            android:layout_marginBottom="12dp" />
+                            android:layout_marginBottom="16dp"
+                            android:textColor="@color/text_primary" />
 
                         <TextView
                             android:id="@+id/tvHighestCategory"
@@ -74,7 +79,8 @@
                             android:layout_height="wrap_content"
                             android:text="Highest Category: None"
                             android:textSize="16sp"
-                            android:layout_marginBottom="12dp" />
+                            android:layout_marginBottom="16dp"
+                            android:textColor="@color/text_primary" />
 
                         <TextView
                             android:id="@+id/tvLowestCategory"
@@ -82,28 +88,46 @@
                             android:layout_height="wrap_content"
                             android:text="Lowest Category: None"
                             android:textSize="16sp"
-                            android:layout_marginBottom="12dp" />
+                            android:layout_marginBottom="16dp"
+                            android:textColor="@color/text_primary" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/divider"
+                            android:layout_marginBottom="16dp" />
 
                         <TextView
                             android:id="@+id/tvMoneySaved"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Money Saved: R0.00"
-                            android:textSize="16sp"
+                            android:text="Net Savings: R0.00"
+                            android:textSize="18sp"
                             android:textColor="@color/success_dark"
-                            android:textStyle="bold"
-                            android:layout_marginBottom="12dp" />
+                            android:textStyle="bold" />
 
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnExportPdf"
                 style="@style/AppButtonPrimary"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Export as PDF" />
+                android:layout_height="60dp"
+                android:text="Export as PDF Document"
+                app:icon="@android:drawable/ic_menu_save"
+                app:iconGravity="textStart" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnShare"
+                style="@style/AppButtonOutlined"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Share Report"
+                android:layout_marginTop="16dp"
+                app:icon="@android:drawable/ic_menu_share"
+                app:iconGravity="textStart" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

@@ -1,9 +1,10 @@
 package com.example.cashflowpro
 
-import android.animation.ValueAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.OvershootInterpolator
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -13,7 +14,6 @@ import androidx.core.view.WindowInsetsCompat
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        android.util.Log.d("MainActivity", "onCreate started")
         try {
             enableEdgeToEdge()
             setContentView(R.layout.activity_main)
@@ -25,64 +25,92 @@ class MainActivity : AppCompatActivity() {
                     v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
                     insets
                 }
-            } else {
-                android.util.Log.e("MainActivity", "Root layout 'main' not found!")
             }
 
-            setupAnimations()
+            setupEntranceAnimations()
 
             findViewById<Button>(R.id.btnGetStarted)?.setOnClickListener {
+                startActivity(Intent(this, RegisterActivity::class.java))
+            }
+            
+            findViewById<Button>(R.id.btnSignIn)?.setOnClickListener {
                 startActivity(Intent(this, LoginActivity::class.java))
             }
-            android.util.Log.d("MainActivity", "onCreate finished successfully")
         } catch (e: Exception) {
             android.util.Log.e("MainActivity", "Crash in MainActivity", e)
         }
     }
 
-    private fun setupAnimations() {
-        val dot1 = findViewById<View>(R.id.dot1)
-        val dot2 = findViewById<View>(R.id.dot2)
-        val dot3 = findViewById<View>(R.id.dot3)
+    private fun setupEntranceAnimations() {
+        val logoCard = findViewById<View>(R.id.mainLogoCard)
+        val appName = findViewById<View>(R.id.tvAppName)
+        val appSubtitle = findViewById<View>(R.id.tvAppSubtitle)
+        val dashboardPreview = findViewById<View>(R.id.dashboardPreview)
+        val featuresList = findViewById<View>(R.id.featuresList)
+        val actionArea = findViewById<View>(R.id.actionArea)
 
-        val pulseAnimation = ValueAnimator.ofFloat(0.6f, 1.0f, 0.6f).apply {
-            duration = 1400
-            repeatCount = ValueAnimator.INFINITE
-            addUpdateListener { animator ->
-                val scale = animator.animatedValue as Float
-                dot1.scaleX = scale
-                dot1.scaleY = scale
-                dot1.alpha = if (scale > 0.7f) 1.0f else 0.6f
-            }
-            startDelay = 0
-        }
+        // Initial states
+        logoCard.alpha = 0f
+        logoCard.scaleX = 0.8f
+        logoCard.scaleY = 0.8f
+        
+        appName.alpha = 0f
+        appName.translationY = 20f
+        
+        appSubtitle.alpha = 0f
+        appSubtitle.translationY = 20f
+        
+        dashboardPreview.alpha = 0f
+        dashboardPreview.translationY = 100f
+        
+        featuresList.alpha = 0f
+        featuresList.translationY = 50f
+        
+        actionArea.alpha = 0f
 
-        val pulseAnimation2 = ValueAnimator.ofFloat(0.6f, 1.0f, 0.6f).apply {
-            duration = 1400
-            repeatCount = ValueAnimator.INFINITE
-            startDelay = 160
-            addUpdateListener { animator ->
-                val scale = animator.animatedValue as Float
-                dot2.scaleX = scale
-                dot2.scaleY = scale
-                dot2.alpha = if (scale > 0.7f) 1.0f else 0.6f
-            }
-        }
+        // Animation Sequence
+        logoCard.animate()
+            .alpha(1f)
+            .scaleX(1f)
+            .scaleY(1f)
+            .setDuration(800)
+            .setInterpolator(OvershootInterpolator())
+            .setStartDelay(200)
+            .start()
 
-        val pulseAnimation3 = ValueAnimator.ofFloat(0.6f, 1.0f, 0.6f).apply {
-            duration = 1400
-            repeatCount = ValueAnimator.INFINITE
-            startDelay = 320
-            addUpdateListener { animator ->
-                val scale = animator.animatedValue as Float
-                dot3.scaleX = scale
-                dot3.scaleY = scale
-                dot3.alpha = if (scale > 0.7f) 1.0f else 0.6f
-            }
-        }
+        appName.animate()
+            .alpha(1f)
+            .translationY(0f)
+            .setDuration(600)
+            .setStartDelay(500)
+            .start()
 
-        pulseAnimation.start()
-        pulseAnimation2.start()
-        pulseAnimation3.start()
+        appSubtitle.animate()
+            .alpha(1f)
+            .translationY(0f)
+            .setDuration(600)
+            .setStartDelay(650)
+            .start()
+
+        dashboardPreview.animate()
+            .alpha(1f)
+            .translationY(0f)
+            .setDuration(1000)
+            .setInterpolator(AccelerateDecelerateInterpolator())
+            .setStartDelay(800)
+            .start()
+
+        featuresList.animate()
+            .alpha(1f)
+            .translationY(0f)
+            .setDuration(800)
+            .setStartDelay(1100)
+            .start()
+
+        actionArea.animate()
+            .alpha(1f)
+            .setDuration(1000)
+            .setStartDelay(1400)
+            .start()
     }
 }

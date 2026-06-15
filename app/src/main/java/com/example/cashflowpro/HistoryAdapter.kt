@@ -7,8 +7,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cashflowpro.data.Expense
 
-class HistoryAdapter(private var expenses: List<Expense>) :
-    RecyclerView.Adapter<HistoryAdapter.ExpenseViewHolder>() {
+class HistoryAdapter(
+    private var expenses: List<Expense>,
+    private val onItemClick: ((Expense) -> Unit)? = null
+) : RecyclerView.Adapter<HistoryAdapter.ExpenseViewHolder>() {
 
     class ExpenseViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvDescription: TextView = view.findViewById(R.id.tvDescription)
@@ -29,12 +31,10 @@ class HistoryAdapter(private var expenses: List<Expense>) :
         holder.tvDate.text = expense.date
         holder.tvAmount.text = "R${String.format("%.2f", expense.amount)}"
         
-        holder.tvCategoryIcon.text = when(expense.category.lowercase()) {
-            "groceries" -> "🍞"
-            "transport" -> "🚗"
-            "entertainment" -> "🍿"
-            "dining" -> "🍴"
-            else -> "💰"
+        holder.tvCategoryIcon.text = getCategoryEmoji(expense.category)
+
+        holder.itemView.setOnClickListener {
+            onItemClick?.invoke(expense)
         }
     }
 
@@ -43,5 +43,25 @@ class HistoryAdapter(private var expenses: List<Expense>) :
     fun updateData(newExpenses: List<Expense>) {
         expenses = newExpenses
         notifyDataSetChanged()
+    }
+
+    fun getExpenseAt(position: Int): Expense {
+        return expenses[position]
+    }
+
+    private fun getCategoryEmoji(category: String): String {
+        return when(category.lowercase()) {
+            "food" -> "🍔"
+            "transport" -> "🚗"
+            "entertainment" -> "🎮"
+            "shopping" -> "🛒"
+            "health" -> "🏥"
+            "education" -> "📚"
+            "utilities" -> "💡"
+            "savings" -> "💰"
+            "groceries" -> "🍞"
+            "dining" -> "🍴"
+            else -> "💰"
+        }
     }
 }

@@ -9,22 +9,24 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/primary">
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:title="Rewards"
-            app:titleTextColor="@color/white"
+            app:titleTextColor="@color/text_primary"
             app:navigationIcon="@android:drawable/ic_menu_revert"
-            app:navigationIconTint="@color/white" />
+            app:navigationIconTint="@color/text_primary" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:overScrollMode="never"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -32,14 +34,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:padding="20dp">
 
             <!-- Points Card -->
             <com.google.android.material.card.MaterialCardView
-                style="@style/AppCardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/primary"
+                app:cardCornerRadius="32dp"
+                app:cardElevation="12dp"
                 android:layout_marginBottom="24dp">
 
                 <LinearLayout
@@ -47,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:padding="24dp">
+                    android:padding="28dp">
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -57,14 +60,16 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Total Points"
+                            android:text="Current Balance"
                             android:textColor="@color/white"
                             android:alpha="0.7"
-                            android:textSize="14sp" />
+                            android:textSize="12sp"
+                            android:textAllCaps="true"
+                            android:letterSpacing="0.05" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="2,450"
+                            android:text="2,450 pts"
                             android:textColor="@color/white"
                             android:textSize="32sp"
                             android:textStyle="bold" />
@@ -73,17 +78,18 @@
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:cardCornerRadius="12dp"
-                        app:cardBackgroundColor="@color/success"
+                        app:cardCornerRadius="14dp"
+                        app:cardBackgroundColor="@color/white"
                         app:cardElevation="0dp">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Level 4"
-                            android:paddingHorizontal="12dp"
-                            android:paddingVertical="4dp"
-                            android:textColor="@color/white"
-                            android:textStyle="bold" />
+                            android:paddingHorizontal="14dp"
+                            android:paddingVertical="6dp"
+                            android:textColor="@color/primary"
+                            android:textStyle="bold"
+                            android:textSize="13sp" />
                     </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -94,13 +100,17 @@
                 android:text="Your Achievements"
                 android:textStyle="bold"
                 android:textColor="@color/text_primary"
-                android:layout_marginBottom="12dp" />
+                android:textSize="18sp"
+                android:layout_marginBottom="16dp" />
 
             <!-- Achievement Item 1 -->
             <com.google.android.material.card.MaterialCardView
                 style="@style/AppCardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/divider"
                 android:layout_marginBottom="12dp">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -108,13 +118,19 @@
                     android:orientation="horizontal"
                     android:padding="16dp"
                     android:gravity="center_vertical">
-                    <TextView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:text="👑"
-                        android:textSize="24sp"
-                        android:gravity="center"
-                        android:background="@color/input_bg" />
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardBackgroundColor="@color/card_bg_light"
+                        app:cardElevation="0dp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="👑"
+                            android:textSize="24sp"
+                            android:gravity="center" />
+                    </com.google.android.material.card.MaterialCardView>
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -126,13 +142,14 @@
                             android:layout_height="wrap_content"
                             android:text="Budget Master"
                             android:textStyle="bold"
-                            android:textColor="@color/text_primary" />
+                            android:textColor="@color/text_primary"
+                            android:textSize="16sp" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Stick to budget for 30 days"
                             android:textSize="12sp"
-                            android:textColor="@color/text_secondary" />
+                            android:textColor="@color/text_hint" />
                     </LinearLayout>
                     <TextView
                         android:layout_width="wrap_content"
@@ -148,6 +165,9 @@
                 style="@style/AppCardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/divider"
                 android:layout_marginBottom="12dp">
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -155,13 +175,19 @@
                     android:orientation="horizontal"
                     android:padding="16dp"
                     android:gravity="center_vertical">
-                    <TextView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:text="🔥"
-                        android:textSize="24sp"
-                        android:gravity="center"
-                        android:background="@color/input_bg" />
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardBackgroundColor="@color/card_bg_light"
+                        app:cardElevation="0dp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="🔥"
+                            android:textSize="24sp"
+                            android:gravity="center" />
+                    </com.google.android.material.card.MaterialCardView>
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -173,13 +199,14 @@
                             android:layout_height="wrap_content"
                             android:text="7-Day Streak"
                             android:textStyle="bold"
-                            android:textColor="@color/text_primary" />
+                            android:textColor="@color/text_primary"
+                            android:textSize="16sp" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Log expenses for 7 days"
                             android:textSize="12sp"
-                            android:textColor="@color/text_secondary" />
+                            android:textColor="@color/text_hint" />
                     </LinearLayout>
                     <TextView
                         android:layout_width="wrap_content"
@@ -196,8 +223,9 @@
                 android:text="Keep budgeting to earn more rewards ✨"
                 android:textAlignment="center"
                 android:textColor="@color/text_hint"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="32dp" />
+                android:layout_marginTop="32dp"
+                android:layout_marginBottom="40dp"
+                android:textSize="13sp" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

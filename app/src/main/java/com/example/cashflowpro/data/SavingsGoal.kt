@@ -6,8 +6,8 @@ import androidx.room.PrimaryKey
 @Entity
 data class SavingsGoal(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    val title: String,
+    val name: String,
     val targetAmount: Double,
-    val currentAmount: Double,
-    val icon: String = "💰"
+    val currentAmount: Double = 0.0,
+    val dueDate: String
 )
