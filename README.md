@@ -90,7 +90,7 @@ Developed with ❤️ by the **Cashflow Pro Team**.
 
 **Clarity Masuku*ST10438928*
 
-**Uanthi Mgandela*ST10447100*
+**Unathi Mgandela*ST10447100*
 
 ## 📄 License
 This project is licensed under the **MIT License**.
