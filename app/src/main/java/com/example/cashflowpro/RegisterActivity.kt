@@ -3,6 +3,7 @@ package com.example.cashflowpro
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -21,7 +22,7 @@ class RegisterActivity : AppCompatActivity() {
         val etEmail = findViewById<TextInputEditText>(R.id.etEmail)
         val etPassword = findViewById<TextInputEditText>(R.id.etPassword)
         val btnRegister = findViewById<Button>(R.id.btnRegister)
-        val tvLogin = findViewById<MaterialButton>(R.id.tvLogin)
+        val tvLogin = findViewById<TextView>(R.id.tvLogin)
 
         val db = AppDatabase.getDatabase(this)
 

@@ -50,67 +50,79 @@ class MainActivity : AppCompatActivity() {
         val actionArea = findViewById<View>(R.id.actionArea)
 
         // Initial states
-        logoCard.alpha = 0f
-        logoCard.scaleX = 0.8f
-        logoCard.scaleY = 0.8f
+        logoCard?.let {
+            it.alpha = 0f
+            it.scaleX = 0.8f
+            it.scaleY = 0.8f
+        }
         
-        appName.alpha = 0f
-        appName.translationY = 20f
+        appName?.let {
+            it.alpha = 0f
+            it.translationY = 20f
+        }
         
-        appSubtitle.alpha = 0f
-        appSubtitle.translationY = 20f
+        appSubtitle?.let {
+            it.alpha = 0f
+            it.translationY = 20f
+        }
         
-        dashboardPreview.alpha = 0f
-        dashboardPreview.translationY = 100f
+        dashboardPreview?.let {
+            it.alpha = 0f
+            it.translationY = 100f
+        }
         
-        featuresList.alpha = 0f
-        featuresList.translationY = 50f
+        featuresList?.let {
+            it.alpha = 0f
+            it.translationY = 50f
+        }
         
-        actionArea.alpha = 0f
+        actionArea?.let {
+            it.alpha = 0f
+        }
 
         // Animation Sequence
-        logoCard.animate()
-            .alpha(1f)
-            .scaleX(1f)
-            .scaleY(1f)
-            .setDuration(800)
-            .setInterpolator(OvershootInterpolator())
-            .setStartDelay(200)
-            .start()
+        logoCard?.animate()
+            ?.alpha(1f)
+            ?.scaleX(1f)
+            ?.scaleY(1f)
+            ?.setDuration(800)
+            ?.setInterpolator(OvershootInterpolator())
+            ?.setStartDelay(200)
+            ?.start()
 
-        appName.animate()
-            .alpha(1f)
-            .translationY(0f)
-            .setDuration(600)
-            .setStartDelay(500)
-            .start()
+        appName?.animate()
+            ?.alpha(1f)
+            ?.translationY(0f)
+            ?.setDuration(600)
+            ?.setStartDelay(500)
+            ?.start()
 
-        appSubtitle.animate()
-            .alpha(1f)
-            .translationY(0f)
-            .setDuration(600)
-            .setStartDelay(650)
-            .start()
+        appSubtitle?.animate()
+            ?.alpha(1f)
+            ?.translationY(0f)
+            ?.setDuration(600)
+            ?.setStartDelay(650)
+            ?.start()
 
-        dashboardPreview.animate()
-            .alpha(1f)
-            .translationY(0f)
-            .setDuration(1000)
-            .setInterpolator(AccelerateDecelerateInterpolator())
-            .setStartDelay(800)
-            .start()
+        dashboardPreview?.animate()
+            ?.alpha(1f)
+            ?.translationY(0f)
+            ?.setDuration(1000)
+            ?.setInterpolator(AccelerateDecelerateInterpolator())
+            ?.setStartDelay(800)
+            ?.start()
 
-        featuresList.animate()
-            .alpha(1f)
-            .translationY(0f)
-            .setDuration(800)
-            .setStartDelay(1100)
-            .start()
+        featuresList?.animate()
+            ?.alpha(1f)
+            ?.translationY(0f)
+            ?.setDuration(800)
+            ?.setStartDelay(1100)
+            ?.start()
 
-        actionArea.animate()
-            .alpha(1f)
-            .setDuration(1000)
-            .setStartDelay(1400)
-            .start()
+        actionArea?.animate()
+            ?.alpha(1f)
+            ?.setDuration(1000)
+            ?.setStartDelay(1400)
+            ?.start()
     }
 }
