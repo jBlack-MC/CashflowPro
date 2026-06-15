@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/AppCardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="4dp">
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    app:cardElevation="2dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,14 +16,20 @@
         android:padding="16dp"
         android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/tvCategoryIcon"
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:background="#F0F6FE"
-            android:gravity="center"
-            android:textSize="24sp"
-            android:text="💰" />
+            app:cardCornerRadius="24dp"
+            app:cardBackgroundColor="@color/input_bg"
+            app:cardElevation="0dp">
+            <TextView
+                android:id="@+id/tvCategoryIcon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:text="💰" />
+        </com.google.android.material.card.MaterialCardView>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -34,8 +42,8 @@
                 android:id="@+id/tvDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Description"
-                android:textColor="#0A2540"
+                tools:text="Weekly Groceries"
+                android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -43,8 +51,8 @@
                 android:id="@+id/tvDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2024-01-01"
-                android:textColor="#5D738B"
+                tools:text="Mar 20, 2024"
+                android:textColor="@color/text_secondary"
                 android:textSize="14sp" />
         </LinearLayout>
 
@@ -52,9 +60,9 @@
             android:id="@+id/tvAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="R0.00"
-            android:textColor="#C73B3B"
+            tools:text="R150.00"
+            android:textColor="@color/error"
             android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

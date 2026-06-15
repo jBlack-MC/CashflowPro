@@ -4,11 +4,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class Expense(
+data class SavingsGoal(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val title: String,
-    val amount: Double,
-    val category: String,
-    val date: String,
-    val notes: String? = null
+    val targetAmount: Double,
+    val currentAmount: Double,
+    val icon: String = "💰"
 )

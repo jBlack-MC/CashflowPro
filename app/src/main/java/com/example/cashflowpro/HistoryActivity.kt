@@ -41,9 +41,17 @@ class HistoryActivity : AppCompatActivity() {
         initViews()
         setupRecyclerView()
         loadAllExpenses()
+        setupToolbar()
 
         btnFilter.setOnClickListener {
             filterExpenses()
+        }
+    }
+
+    private fun setupToolbar() {
+        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        toolbar.setNavigationOnClickListener {
+            finish()
         }
     }
 

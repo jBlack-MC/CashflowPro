@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Primary Palette -->
+    <color name="primary">#0A2540</color>
+    <color name="primary_variant">#1A3B5D</color>
+    <color name="on_primary">#FFFFFF</color>
+
+    <!-- Background and Surface -->
+    <color name="background">#EEF2F5</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="on_surface">#0A2540</color>
+    <color name="card_bg_light">#F5F9FF</color>
+
+    <!-- Semantic Colors -->
+    <color name="success">#2ECC71</color>
+    <color name="success_dark">#1D8844</color>
+    <color name="success_bg">#E2F7E9</color>
+
+    <color name="warning">#FFB347</color>
+    <color name="error">#C73B3B</color>
+    <color name="error_bg">#FEEAE8</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#0A2540</color>
+    <color name="text_secondary">#5D738B</color>
+    <color name="text_hint">#A7B8C9</color>
+
+    <!-- Others -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="input_bg">#F1F6FA</color>
 </resources>

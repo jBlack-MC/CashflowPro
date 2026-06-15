@@ -12,6 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CashflowPro">
         <activity
+            android:name=".SavingsGoalActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BadgeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GoalActivity"
+            android:exported="false" />
+        <activity
             android:name=".AnalyticsActivity"
             android:exported="false" />
         <activity

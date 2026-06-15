@@ -12,4 +12,10 @@ interface CategoryDao {
 
     @Query("SELECT * FROM Category")
     suspend fun getAllCategories(): List<Category>
+
+    @androidx.room.Update
+    suspend fun updateCategory(category: Category)
+
+    @androidx.room.Delete
+    suspend fun deleteCategory(category: Category)
 }

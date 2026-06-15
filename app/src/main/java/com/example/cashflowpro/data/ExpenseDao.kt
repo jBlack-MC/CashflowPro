@@ -19,6 +19,9 @@ interface ExpenseDao {
     @Query("SELECT SUM(amount) FROM Expense WHERE category = :category")
     suspend fun getTotalByCategory(category: String): Double?
 
+    @Query("SELECT SUM(amount) FROM Expense WHERE date = :date")
+    suspend fun getTotalByDate(date: String): Double?
+
     @Query("SELECT * FROM Expense WHERE date BETWEEN :startDate AND :endDate ORDER BY date DESC")
     suspend fun getExpensesByDateRange(startDate: String, endDate: String): List<Expense>
 

@@ -7,10 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.cashflowpro.data.AppDatabase
 import com.example.cashflowpro.data.Expense
@@ -21,9 +18,10 @@ import java.util.Locale
 
 class AddExpenseActivity : AppCompatActivity() {
 
+    private lateinit var etTitle: EditText
     private lateinit var etAmount: EditText
     private lateinit var etDate: EditText
-    private lateinit var etDescription: EditText
+    private lateinit var etNotes: EditText
     private lateinit var spinnerCategory: Spinner
     private lateinit var btnSave: Button
 
@@ -31,31 +29,48 @@ class AddExpenseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_add_expense)
         
-        Log.d("AddExpenseActivity", "Activity created")
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-
         initViews()
+        loadCategories()
         setupListeners()
+        setupToolbar()
+    }
+
+    private fun setupToolbar() {
+        val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        toolbar.setNavigationOnClickListener {
+            finish()
+        }
     }
 
     private fun initViews() {
+        etTitle = findViewById(R.id.etTitle)
         etAmount = findViewById(R.id.etAmount)
         etDate = findViewById(R.id.etDate)
-        etDescription = findViewById(R.id.etDescription)
+        etNotes = findViewById(R.id.etNotes)
         spinnerCategory = findViewById(R.id.spinnerCategory)
         btnSave = findViewById(R.id.btnSave)
 
-        // Set current date as default
-        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         etDate.setText(sdf.format(Date()))
+    }
+
+    private fun loadCategories() {
+        lifecycleScope.launch {
+            val categories = db.categoryDao().getAllCategories().map { it.name }
+            if (categories.isEmpty()) {
+                // If empty, maybe add some defaults or prompt user
+                val defaults = listOf("Food", "Transport", "Entertainment", "Education", "Clothing", "Utilities", "Savings")
+                val adapter = ArrayAdapter(this@AddExpenseActivity, android.R.layout.simple_spinner_item, defaults)
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spinnerCategory.adapter = adapter
+            } else {
+                val adapter = ArrayAdapter(this@AddExpenseActivity, android.R.layout.simple_spinner_item, categories)
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spinnerCategory.adapter = adapter
+            }
+        }
     }
 
     private fun setupListeners() {
@@ -65,14 +80,14 @@ class AddExpenseActivity : AppCompatActivity() {
     }
 
     private fun saveExpense() {
-        val amountStr = etAmount.text.toString()
-        val date = etDate.text.toString()
-        val description = etDescription.text.toString()
-        val category = spinnerCategory.selectedItem.toString()
+        val title = etTitle.text.toString().trim()
+        val amountStr = etAmount.text.toString().trim()
+        val date = etDate.text.toString().trim()
+        val notes = etNotes.text.toString().trim()
+        val category = spinnerCategory.selectedItem?.toString() ?: ""
 
-        if (amountStr.isBlank() || date.isBlank() || description.isBlank()) {
-            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
-            Log.w("AddExpenseActivity", "Attempted to save with empty fields")
+        if (title.isEmpty() || amountStr.isEmpty() || date.isEmpty() || category.isEmpty()) {
+            Toast.makeText(this, "Please fill all required fields", Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -83,23 +98,21 @@ class AddExpenseActivity : AppCompatActivity() {
         }
 
         val expense = Expense(
+            title = title,
             amount = amount,
             category = category,
-            description = description,
             date = date,
-            startTime = "", // Added empty defaults if required by Entity but not in form
-            endTime = "",
-            imageUri = null
+            notes = if (notes.isEmpty()) null else notes
         )
 
         lifecycleScope.launch {
             try {
                 db.expenseDao().insertExpense(expense)
-                Log.i("AddExpenseActivity", "Expense saved: $expense")
+                Log.d("Expense", "Expense Added: $title, Amount: $amount")
                 Toast.makeText(this@AddExpenseActivity, "Expense saved successfully", Toast.LENGTH_SHORT).show()
                 finish()
             } catch (e: Exception) {
-                Log.e("AddExpenseActivity", "Error saving expense", e)
+                Log.e("Database", "Insert Failed", e)
                 Toast.makeText(this@AddExpenseActivity, "Error saving expense", Toast.LENGTH_SHORT).show()
             }
         }

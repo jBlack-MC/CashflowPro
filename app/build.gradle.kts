@@ -46,6 +46,8 @@ dependencies {
     // Room
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.recyclerview.v7)
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
     ksp(libs.androidx.room.compiler)
 
     testImplementation(libs.junit)
