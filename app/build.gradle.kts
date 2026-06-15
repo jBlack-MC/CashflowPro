@@ -54,7 +54,7 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     implementation(libs.jbcrypt)
     implementation(libs.androidx.biometric)
-    implementation(libs.recyclerview.v7)
+    implementation(libs.recyclerview)
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
     ksp(libs.androidx.room.compiler)
 
