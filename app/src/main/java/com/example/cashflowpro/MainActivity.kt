@@ -13,18 +13,30 @@ import androidx.core.view.WindowInsetsCompat
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+        android.util.Log.d("MainActivity", "onCreate started")
+        try {
+            enableEdgeToEdge()
+            setContentView(R.layout.activity_main)
+            
+            val rootLayout = findViewById<View>(R.id.main)
+            if (rootLayout != null) {
+                ViewCompat.setOnApplyWindowInsetsListener(rootLayout) { v, insets ->
+                    val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+                    v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+                    insets
+                }
+            } else {
+                android.util.Log.e("MainActivity", "Root layout 'main' not found!")
+            }
 
-        setupAnimations()
+            setupAnimations()
 
-        findViewById<Button>(R.id.btnGetStarted).setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
+            findViewById<Button>(R.id.btnGetStarted)?.setOnClickListener {
+                startActivity(Intent(this, LoginActivity::class.java))
+            }
+            android.util.Log.d("MainActivity", "onCreate finished successfully")
+        } catch (e: Exception) {
+            android.util.Log.e("MainActivity", "Crash in MainActivity", e)
         }
     }
 

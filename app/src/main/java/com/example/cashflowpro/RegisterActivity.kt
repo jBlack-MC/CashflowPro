@@ -41,7 +41,8 @@ class RegisterActivity : AppCompatActivity() {
                     Log.d("Auth", "Registration Failed: User already exists ($email)")
                     Toast.makeText(this@RegisterActivity, "User already exists", Toast.LENGTH_SHORT).show()
                 } else {
-                    val newUser = User(fullName = fullName, email = email, password = password)
+                    val hashedPassword = org.mindrot.jbcrypt.BCrypt.hashpw(password, org.mindrot.jbcrypt.BCrypt.gensalt())
+                    val newUser = User(fullName = fullName, email = email, password = hashedPassword)
                     db.userDao().insert(newUser)
                     Log.d("Auth", "Registration Successful: $email")
                     Toast.makeText(this@RegisterActivity, "Registration successful", Toast.LENGTH_SHORT).show()

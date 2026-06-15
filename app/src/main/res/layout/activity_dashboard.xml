@@ -271,65 +271,17 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Category Spending"
+                        android:text="Top Spending Categories"
                         android:textStyle="bold"
                         android:textColor="@color/text_primary"
                         android:layout_marginBottom="12dp" />
 
                     <LinearLayout
+                        android:id="@+id/categoryContainer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="8dp">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="🍞 Groceries" />
-                        <TextView
-                            android:id="@+id/tvGroceriesSpent"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="R0"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:layout_marginBottom="8dp">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="🚗 Transport" />
-                        <TextView
-                            android:id="@+id/tvTransportSpent"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="R0"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="🍿 Entertainment" />
-                        <TextView
-                            android:id="@+id/tvEntertainmentSpent"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="R0"
-                            android:textStyle="bold" />
+                        android:orientation="vertical">
+                        <!-- Dynamic categories will be added here -->
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

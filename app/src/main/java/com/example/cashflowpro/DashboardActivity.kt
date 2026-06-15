@@ -24,9 +24,7 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var tvPercentUsed: TextView
     private lateinit var tvLeftLabel: TextView
     
-    private lateinit var tvGroceriesSpent: TextView
-    private lateinit var tvTransportSpent: TextView
-    private lateinit var tvEntertainmentSpent: TextView
+    private lateinit var categoryContainer: android.widget.LinearLayout
     
     private lateinit var budgetProgress: LinearProgressIndicator
     private lateinit var btnAddExpenseFab: FloatingActionButton
@@ -66,9 +64,7 @@ class DashboardActivity : AppCompatActivity() {
         tvPercentUsed = findViewById(R.id.tvPercentUsed)
         tvLeftLabel = findViewById(R.id.tvLeftLabel)
         
-        tvGroceriesSpent = findViewById(R.id.tvGroceriesSpent)
-        tvTransportSpent = findViewById(R.id.tvTransportSpent)
-        tvEntertainmentSpent = findViewById(R.id.tvEntertainmentSpent)
+        categoryContainer = findViewById(R.id.categoryContainer)
         
         budgetProgress = findViewById(R.id.budgetProgress)
         btnAddExpenseFab = findViewById(R.id.btnAddExpenseFab)
@@ -126,13 +122,11 @@ class DashboardActivity : AppCompatActivity() {
                 val budget = db.budgetDao().getBudget()
                 val totalMonthlyBudget = budget?.max ?: 5000.0
 
-                val totalSpent = db.expenseDao().getTotalExpenses() ?: 0.0
-                val groceriesSpent = db.expenseDao().getTotalByCategory("Groceries") ?: 0.0
-                val transportSpent = db.expenseDao().getTotalByCategory("Transport") ?: 0.0
-                val entertainmentSpent = db.expenseDao().getTotalByCategory("Entertainment") ?: 0.0
+                val allExpenses = db.expenseDao().getAllExpenses()
+                val totalSpent = allExpenses.sumOf { it.amount }
 
                 val remaining = totalMonthlyBudget - totalSpent
-                val percentUsed = (totalSpent / totalMonthlyBudget * 100).coerceIn(0.0, 100.0)
+                val percentUsed = if (totalMonthlyBudget > 0) (totalSpent / totalMonthlyBudget * 100).coerceIn(0.0, 100.0) else 0.0
 
                 // Update Overview
                 tvTotalBudget.text = String.format(Locale.getDefault(), "R%.0f", totalMonthlyBudget)
@@ -141,13 +135,11 @@ class DashboardActivity : AppCompatActivity() {
                 tvPercentUsed.text = String.format(Locale.getDefault(), "%.0f%%", percentUsed)
                 tvLeftLabel.text = String.format(Locale.getDefault(), "R%.0f left until you reach your limit", remaining)
 
-                // Update Categories
-                tvGroceriesSpent.text = String.format(Locale.getDefault(), "R%.0f", groceriesSpent)
-                tvTransportSpent.text = String.format(Locale.getDefault(), "R%.0f", transportSpent)
-                tvEntertainmentSpent.text = String.format(Locale.getDefault(), "R%.0f", entertainmentSpent)
-
                 // Update Progress Indicator
                 budgetProgress.progress = percentUsed.toInt()
+
+                // Update Categories Dynamically
+                updateCategorySummary(allExpenses)
                 
                 updateGoalRangeVisuals(totalSpent, budget?.min ?: 2000.0, totalMonthlyBudget)
 
@@ -156,6 +148,57 @@ class DashboardActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 Log.e("DashboardActivity", "Error updating dashboard", e)
             }
+        }
+    }
+
+    private fun updateCategorySummary(expenses: List<com.example.cashflowpro.data.Expense>) {
+        categoryContainer.removeAllViews()
+        
+        val categoryTotals = expenses.groupBy { it.category }
+            .mapValues { entry -> entry.value.sumOf { it.amount } }
+            .toList()
+            .sortedByDescending { it.second }
+            .take(3)
+
+        if (categoryTotals.isEmpty()) {
+            val tvEmpty = TextView(this)
+            tvEmpty.text = "No category data available"
+            tvEmpty.setTextColor(getColor(R.color.text_hint))
+            categoryContainer.addView(tvEmpty)
+            return
+        }
+
+        for ((category, total) in categoryTotals) {
+            val row = android.widget.LinearLayout(this)
+            row.orientation = android.widget.LinearLayout.HORIZONTAL
+            row.setPadding(0, 0, 0, 8)
+            
+            val tvName = TextView(this)
+            tvName.layoutParams = android.widget.LinearLayout.LayoutParams(0, -2, 1f)
+            tvName.text = getCategoryEmoji(category) + " " + category
+            tvName.setTextColor(getColor(R.color.text_primary))
+            
+            val tvTotal = TextView(this)
+            tvTotal.text = String.format(Locale.getDefault(), "R%.0f", total)
+            tvTotal.setTypeface(null, android.graphics.Typeface.BOLD)
+            tvTotal.setTextColor(getColor(R.color.text_primary))
+            
+            row.addView(tvName)
+            row.addView(tvTotal)
+            categoryContainer.addView(row)
+        }
+    }
+
+    private fun getCategoryEmoji(category: String): String {
+        return when(category.lowercase()) {
+            "food", "groceries" -> "🍞"
+            "transport" -> "🚗"
+            "entertainment" -> "🍿"
+            "education" -> "🎓"
+            "clothing" -> "👕"
+            "utilities" -> "💡"
+            "savings" -> "💰"
+            else -> "📁"
         }
     }
 

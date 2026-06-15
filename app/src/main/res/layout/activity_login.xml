@@ -114,6 +114,17 @@
                     android:layout_height="wrap_content"
                     android:text="Sign in" />
 
+                <!-- Biometric Login Button -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnBiometric"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Use Fingerprint"
+                    android:layout_marginTop="8dp"
+                    app:icon="@android:drawable/ic_lock_idle_lock"
+                    app:iconGravity="textStart" />
+
                 <!-- Create Account Link -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/tvCreateAccount"
