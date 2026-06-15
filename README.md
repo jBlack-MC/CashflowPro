@@ -1,19 +1,28 @@
 # Cashflow Pro - Smart Personal Budget Tracker
 
-**Cashflow Pro** is a comprehensive, offline-first Android application designed to help users take full control of their personal finances. Built with Kotlin and modern Android Jetpack components, it combines daily transaction tracking with intelligent budgeting, savings goals, and gamified rewards to make financial management both effective and engaging.
+**Cashflow Pro** is a premium, offline-first Android application designed for **young professionals and students** who want to take full control of their personal finances. Built with Kotlin and modern Android Jetpack components, it simplifies daily transaction tracking and motivates users through intelligent budgeting and gamified progress.
 
 ## 🚀 Overview
-Cashflow Pro provides a secure and intuitive environment to manage your money. It focuses on privacy, visual clarity, and motivating users to reach their financial milestones through interactive charts and achievement badges. Whether you're tracking daily coffee expenses or saving for a new car, Cashflow Pro is your ultimate financial companion.
+Cashflow Pro provides a secure and intuitive environment to manage your money. It focuses on privacy, visual clarity, and encouraging financial discipline. Whether you're tracking daily coffee expenses or saving for a long-term milestone, Cashflow Pro serves as your ultimate financial companion.
 
-## ✨ Key Features
-*   **🔐 Secure Authentication**: Multi-layer security including BCrypt password hashing and Biometric Login (Fingerprint/Face Unlock).
-*   **📊 Smart Dashboard**: Real-time summary of balance, total budget, and total spending with "Goal Range" visual health indicators.
-*   **🎯 Savings Goals**: Dedicated tracker for large milestones. Monitor progress percentages and remaining amounts dynamically.
-*   **📉 Interactive Analytics**: Visual breakdown of spending by category using high-performance Pie and Bar charts (MPAndroidChart).
-*   **💸 Expense & Income Management**: Fast transaction logging with support for titles, amounts, custom categories, and notes.
-*   **🏆 Gamification (Rewards)**: Stay motivated by unlocking badges like "Beginner Saver," "Smart Saver," and "Budget Master."
-*   **📁 Custom Categories**: Full control over spending categories with custom emojis and descriptions.
-*   **🔍 Advanced Search**: Instant filtering of transaction history by name or category.
+## 🎨 Design Decisions
+*   **Fintech Clean Aesthetics**: We adopted a "Premium Fintech" style using a neutral palette (Slate & White) with **Emerald Green** (#0FBA83) as the primary action color to evoke a sense of growth and success.
+*   **Information Architecture**: A "One-Tap" navigation philosophy was used, placing major features (Expenses, Analytics, Goals) within easy reach via a Bottom Navigation bar and a central Floating Action Button for quick entries.
+*   **Visual Feedback**: Instead of just showing numbers, we used dynamic progress indicators and "Health Status" cards to give users an immediate emotional connection to their financial data.
+*   **Premium Motion**: Implemented sophisticated entrance animations and a subtle floating logo effect on the splash screen to create a high-end startup feel from the first second.
+
+## 🛠️ Custom Features
+### 1. Visual Spending Health Monitor
+Unlike standard trackers, Cashflow Pro uses a triple-state logic to monitor your "Financial Health." Based on your set minimum and maximum targets, the app dynamically changes the UI state:
+*   **🟡 Below Minimum**: Alerts you when you haven't reached your savings/spending floor.
+*   **🟢 Within Goal**: A "Sweet Spot" indicator that confirms you are on track.
+*   **🔴 Over Budget**: Immediate visual warning when spending exceeds your defined safety limit.
+
+### 2. Gamified Rewards & Achievement System
+To combat "budgeting fatigue," we integrated a rewards engine that tracks user behavior. Users earn XP and unlock badges (🥉, 🥈, 🥇) for maintaining streaks, reaching 50% of a goal, or staying under budget for a week. This turns a chore into a rewarding experience.
+
+## 🎥 Demo Video
+[Watch the Cashflow Pro Walkthrough](https://youtu.be/placeholder) *(Replace with actual link)*
 
 ## 📸 Screenshots
 | Welcome | Dashboard | Expenses |
@@ -24,96 +33,51 @@ Cashflow Pro provides a secure and intuitive environment to manage your money. I
 | :---: | :---: | :---: |
 | ![Analytics](/screenshots/analytics.png) | ![Goals](/screenshots/goals.png) | ![Rewards](/screenshots/rewards.png) |
 
+## 💻 GitHub & CI/CD
+*   **Version Control**: We utilized a Git-flow inspired workflow, using branch management to isolate feature development (e.g., `feature/navigation-fix`) from the `master` branch.
+*   **GitHub Actions**: We implemented an automated CI/CD pipeline. On every push to `master`, a GitHub Action:
+    1.  Sets up the Java/Android environment.
+    2.  Runs Lint checks for code quality.
+    3.  Executes unit and instrumented tests.
+    4.  Builds the debug APK automatically for rapid distribution.
+
 ## 🛠️ Technologies Used
 *   **Kotlin**: The primary language for modern Android development.
 *   **Room Database**: Local data persistence for high-speed offline access.
 *   **Jetpack Navigation**: Seamless fragment-based app flow.
 *   **MPAndroidChart**: Powerful, interactive data visualization library.
-*   **Biometric API**: Industry-standard secure login integration.
+*   **Biometric API**: Industry-standard secure login integration (Fingerprint/Face).
 *   **jBCrypt**: Secure cryptographic password hashing.
-*   **Coroutines & Lifecycle**: Efficient background processing and state management.
+*   **Coroutines**: Efficient background processing.
 *   **Material Design 3**: Modern, responsive UI components.
-*   **GitHub Actions**: Automated CI/CD pipeline for building and testing.
 
 ## 🏗️ Architecture
-The project follows a modular structure focused on the **Model-View-Controller (MVC)** pattern, leveraging Android Jetpack components to ensure lifecycle awareness and robust data management.
+The project follows a modular **MVC (Model-View-Controller)** pattern, leveraging Android Jetpack components to ensure lifecycle awareness.
 
 ```text
 CashflowPro/
-├── .github/workflows/    # CI/CD Automation
+├── .github/workflows/    # CI/CD Automation (GitHub Actions)
 ├── app/
 │   ├── src/main/java/com/example/cashflowpro/
 │   │   ├── data/         # Room Database, Entities, and DAOs
 │   │   ├── presentation/ # Fragments and UI Logic
 │   │   └── Activities    # Main UI Controllers
-│   ├── src/androidTest/  # Automated Instrumented Tests
-│   └── build.gradle.kts  # Project Dependencies
+│   ├── src/main/res/     # Layouts, Themes, and Drawables
+│   └── build.gradle.kts  # Dependencies
 ```
 
 ## ⚙️ Installation & Build
-### Prerequisites
-*   Android Studio Ladybug (2024.2.1) or newer.
-*   Android SDK 24 (Nougat) or higher.
-
-### Step-by-Step
-1.  **Clone the Repository**:
-    ```bash
-    git clone https://github.com/username/CashflowPro.git
-    ```
-2.  **Open in Android Studio**:
-    Select "Open an existing project" and navigate to the cloned folder.
-3.  **Sync Gradle**:
-    Allow Android Studio to download dependencies and sync the project structure.
-4.  **Run the App**:
-    Select a physical device or emulator (API 24+) and click **Run**.
-
-### Building the APK
-To generate a release APK:
-1.  Navigate to `Build > Build Bundle(s) / APK(s) > Build APK(s)`.
-2.  The APK will be generated in `app/build/outputs/apk/debug/`.
-
-## 🗄️ Database Structure
-Cashflow Pro utilizes a relational Room database with the following key entities:
-*   **User**: Handles local authentication and profile data.
-*   **Expense / Income**: Stores transaction records linked to categories.
-*   **Budget**: Defines user-set limits for monthly spending.
-*   **SavingsGoal**: Tracks progress toward specific financial targets.
-*   **Badge**: Manages unlocked achievements and rewards.
-
-## 🧪 Automated Testing
-The project includes a robust suite of instrumented tests to verify core logic:
-*   **Database Operations**: Verifies CRUD operations for expenses and income.
-*   **Financial Math**: Tests goal percentage calculations and budget remaining logic.
-*   **Security**: Ensures biometric and hashed authentication flows work correctly.
-
-Run tests via Gradle:
-```bash
-./gradlew connectedCheck
-```
+1.  **Clone**: `git clone https://github.com/jBlack-MC/CashflowPro.git`
+2.  **Open**: Open the project in **Android Studio Ladybug**.
+3.  **Sync**: Allow Gradle to sync dependencies.
+4.  **Run**: Deploy to an emulator or physical device (API 24+).
 
 ## 🚀 What's New
 ### v1.2 Release Notes (Latest)
-*   **Navigation Fix**: Resolved critical `ClassCastException` in Login/Registration screens that caused the app to crash.
-*   **Bug Fix**: Fixed the "History" redirection issue where users were sent to the onboarding page instead of the activity stream.
-*   **New Feature**: Full Expense Editing. Users can now swipe to edit existing expenses with pre-filled data.
-*   **New Feature**: Deletion Support. Implemented Swipe-to-Delete for expenses and a delete action for savings goals.
-*   **Navigation Improvement**: Fully re-linked all orphan screens (Goal Activity, Splash Screen) into a logical user journey.
-*   **Stability**: Standardized View casting across the project to prevent runtime crashes.
-
-### v1.1 Release Notes
-*   **New Feature**: Biometric Authentication (Fingerprint & Face Unlock).
-*   **New Feature**: Advanced Search & Filtering in Transaction History.
-*   **UI Improvement**: Sophisticated Entrance Animations for a premium onboarding experience.
-*   **UI Improvement**: New "Visual Spending Health" indicators on the dashboard.
-*   **UI Improvement**: Redesigned Category cards with emoji support.
-*   **Bug Fix**: Resolved Jetifier deprecation warning in Gradle settings.
-*   **Maintenance**: Fully automated CI/CD pipeline integrated via GitHub Actions.
-
-## 🔮 Future Improvements
-*   **Cloud Sync**: Integration with Firebase for multi-device data synchronization.
-*   **Export Reports**: Support for exporting financial data to CSV or PDF.
-*   **Shared Budgets**: Ability to manage shared finances with partners or family.
-*   **Dark Mode**: Native support for system-wide dark theme.
+*   **Navigation Fix**: Resolved critical `ClassCastException` in Login screens.
+*   **UI/UX**: Added premium floating logo animation on Splash screen.
+*   **New Feature**: Full Expense Editing and Swipe-to-Delete support.
+*   **New Feature**: Savings Goal management with fund addition and deletion.
 
 ## 👨‍💻 Authors
 Developed with ❤️ by the **Cashflow Pro Team**.
