@@ -80,6 +80,7 @@ CashflowPro/
 2.  **Open**: Open the project in **Android Studio Ladybug**.
 3.  **Sync**: Allow Gradle to sync dependencies.
 4.  **Run**: Deploy to an emulator or physical device (API 24+).
+5.  **Open**: the project folder **Run**: run the CashflowPro_v1.2.apk.
 
 ## 🚀 What's New
 ### v1.2 Release Notes (Latest)
