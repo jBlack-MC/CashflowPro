@@ -25,6 +25,9 @@ To combat "budgeting fatigue," we integrated a rewards engine that tracks user b
 [Watch the Cashflow Pro Walkthrough](https://youtu.be/placeholder) *(Replace with actual link)*
 
 ## 📸 Screenshots
+cashflow apk on a device 
+<img width="1080" height="2376" alt="WhatsApp Image 2026-06-15 at 22 08 59" src="https://github.com/user-attachments/assets/8a616fc9-54a5-4f85-bf56-ef92871430d1" />
+
 | Welcome | Dashboard | Expenses |
 | :---: | :---: | :---: |
 | ![Welcome](/screenshots/welcome.png) | ![Dashboard](/screenshots/dashboard.png) | ![Expenses](/screenshots/expenses.png) |
