@@ -26,16 +26,19 @@ To combat "budgeting fatigue," we integrated a rewards engine that tracks user b
 
 ## 📸 Screenshots
 cashflow apk on a device 
+
 <img width="208" height="437" alt="WhatsApp Image 2026-06-15 at 22 08 59" src="https://github.com/user-attachments/assets/8a616fc9-54a5-4f85-bf56-ef92871430d1" />
 
-| Welcome | Dashboard | Expenses |
-| <img width="227" height="400" alt="WhatsApp Image 2026-06-15 at 23 03 39" src="https://github.com/user-attachments/assets/81a65a5f-89dc-4602-9e28-055d1fd056cc" />
- | :---: | :---: |
-| ![Welcome](/screenshots/welcome.png) | ![Dashboard](/screenshots/dashboard.png) | ![Expenses](/screenshots/expenses.png) |
+| Welcome |
 
-| Analytics | Goals | Rewards |
-| :---: | :---: | :---: |
-| ![Analytics](/screenshots/analytics.png) | ![Goals](/screenshots/goals.png) | ![Rewards](/screenshots/rewards.png) |
+| <img width="227" height="400" alt="WhatsApp Image 2026-06-15 at 23 03 39" src="https://github.com/user-attachments/assets/81a65a5f-89dc-4602-9e28-055d1fd056cc" />
+
+  Dashboard 
+
+  <img width="227" height="400" alt="WhatsApp Image 2026-06-15 at 23 03 38 (3)" src="https://github.com/user-attachments/assets/0e7bf741-44b5-4e31-aab8-a8cfadef5cb2" />
+
+
+
 
 ## 💻 GitHub & CI/CD
 *   **Version Control**: We utilized a Git-flow inspired workflow, using branch management to isolate feature development (e.g., `feature/navigation-fix`) from the `master` branch.
