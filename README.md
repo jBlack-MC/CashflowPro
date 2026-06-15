@@ -23,6 +23,7 @@ To combat "budgeting fatigue," we integrated a rewards engine that tracks user b
 
 ## 🎥 Demo Video
 [Watch the Cashflow Pro Walkthrough]([https://youtu.be/placeholder](https://youtu.be/kuoTVZuTQxc)) 
+https://youtu.be/kuoTVZuTQxc
 
 ## 📸 Screenshots
 cashflow apk on a device 
