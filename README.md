@@ -93,11 +93,11 @@ CashflowPro/
 ## 👨‍💻 Authors
 Developed with ❤️ by the **Cashflow Pro Team**.
 
- **Sibusiso Mabena*ST10462532* 
+ **Sibusiso Mabena *ST10462532* 
 
-**Clarity Masuku*ST10438928*
+**Clarity Masuku *ST10438928*
 
-**Unathi Mgandela*ST10447100*
+**Unathi Mgandela *ST10447100*
 
 ## 📄 License
 This project is licensed under the **MIT License**.
