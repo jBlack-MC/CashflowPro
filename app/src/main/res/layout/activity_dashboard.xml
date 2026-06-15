@@ -22,7 +22,7 @@
             <ImageView
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:src="@drawable/logo"
+                android:src="@drawable/cashflow_logo"
                 android:layout_gravity="end"
                 android:layout_marginEnd="16dp" />
 
