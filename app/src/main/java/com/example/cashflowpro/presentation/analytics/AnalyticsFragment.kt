@@ -42,6 +42,10 @@ class AnalyticsFragment : Fragment() {
         initViews(view)
         setupCharts()
         loadData()
+        
+        view.setOnClickListener {
+            startActivity(android.content.Intent(requireContext(), com.example.cashflowpro.AnalyticsActivity::class.java))
+        }
     }
 
     private fun initViews(view: View) {

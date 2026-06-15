@@ -92,6 +92,14 @@ Run tests via Gradle:
 ```
 
 ## 🚀 What's New
+### v1.2 Release Notes (Latest)
+*   **Navigation Fix**: Resolved critical `ClassCastException` in Login/Registration screens that caused the app to crash.
+*   **Bug Fix**: Fixed the "History" redirection issue where users were sent to the onboarding page instead of the activity stream.
+*   **New Feature**: Full Expense Editing. Users can now swipe to edit existing expenses with pre-filled data.
+*   **New Feature**: Deletion Support. Implemented Swipe-to-Delete for expenses and a delete action for savings goals.
+*   **Navigation Improvement**: Fully re-linked all orphan screens (Goal Activity, Splash Screen) into a logical user journey.
+*   **Stability**: Standardized View casting across the project to prevent runtime crashes.
+
 ### v1.1 Release Notes
 *   **New Feature**: Biometric Authentication (Fingerprint & Face Unlock).
 *   **New Feature**: Advanced Search & Filtering in Transaction History.

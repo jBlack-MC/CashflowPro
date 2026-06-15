@@ -15,10 +15,12 @@ import com.example.cashflowpro.data.AppDatabase
 import com.example.cashflowpro.data.Expense
 import kotlinx.coroutines.launch
 
+import com.google.android.material.textfield.TextInputEditText
+
 class HistoryActivity : AppCompatActivity() {
 
     private lateinit var rvHistory: RecyclerView
-    private lateinit var etSearch: EditText
+    private lateinit var etSearch: TextInputEditText
     private lateinit var emptyState: LinearLayout
     private lateinit var adapter: HistoryAdapter
     private var allExpenses: List<Expense> = emptyList()
@@ -65,9 +67,13 @@ class HistoryActivity : AppCompatActivity() {
 
     private fun loadData() {
         lifecycleScope.launch {
-            allExpenses = db.expenseDao().getAllExpenses()
-            adapter.updateData(allExpenses)
-            updateEmptyState(allExpenses.isEmpty())
+            try {
+                allExpenses = db.expenseDao().getAllExpenses()
+                adapter.updateData(allExpenses)
+                updateEmptyState(allExpenses.isEmpty())
+            } catch (e: Exception) {
+                android.util.Log.e("HistoryActivity", "Error loading data", e)
+            }
         }
     }
 

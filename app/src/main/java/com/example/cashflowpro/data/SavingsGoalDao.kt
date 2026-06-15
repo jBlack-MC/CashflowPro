@@ -10,6 +10,9 @@ interface SavingsGoalDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertGoal(goal: SavingsGoal)
 
+    @androidx.room.Delete
+    suspend fun deleteGoal(goal: SavingsGoal)
+
     @Query("SELECT * FROM SavingsGoal")
     suspend fun getAllGoals(): List<SavingsGoal>
 

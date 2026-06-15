@@ -10,6 +10,9 @@ interface ExpenseDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertExpense(expense: Expense)
 
+    @androidx.room.Delete
+    suspend fun deleteExpense(expense: Expense)
+
     @Query("SELECT * FROM Expense ORDER BY date DESC")
     suspend fun getAllExpenses(): List<Expense>
 

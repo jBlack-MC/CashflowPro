@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.cashflowpro.*
 import com.google.android.material.button.MaterialButton
-import com.google.firebase.auth.FirebaseAuth
 
 class ProfileFragment : Fragment() {
 
@@ -36,7 +35,7 @@ class ProfileFragment : Fragment() {
         }
 
         view.findViewById<MaterialButton>(R.id.btnLogout).setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
+            // Clear any session if exists (local db doesn't really have one here)
             val intent = Intent(requireContext(), LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)

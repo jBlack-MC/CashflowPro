@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricPrompt
@@ -30,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
         val etPassword = findViewById<TextInputEditText>(R.id.etPassword)
         val btnLogin = findViewById<Button>(R.id.btnLogin)
         val btnBiometric = findViewById<MaterialButton>(R.id.btnBiometric)
-        val tvCreateAccount = findViewById<MaterialButton>(R.id.tvCreateAccount)
+        val tvCreateAccount = findViewById<TextView>(R.id.tvCreateAccount)
 
         val db = AppDatabase.getDatabase(this)
 

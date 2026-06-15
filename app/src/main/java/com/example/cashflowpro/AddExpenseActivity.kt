@@ -19,6 +19,7 @@ class AddExpenseActivity : AppCompatActivity() {
     private lateinit var etNotes: EditText
     private lateinit var spinnerCategory: Spinner
     private lateinit var btnSave: Button
+    private var editingExpenseId: Int = -1
 
     private val db by lazy { AppDatabase.getDatabase(this) }
 
@@ -26,14 +27,33 @@ class AddExpenseActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_expense)
         
+        editingExpenseId = intent.getIntExtra("EXPENSE_ID", -1)
+        
         setupToolbar()
         initViews()
         loadCategories()
         setupListeners()
+
+        if (editingExpenseId != -1) {
+            loadExpenseData()
+        }
+    }
+
+    private fun loadExpenseData() {
+        lifecycleScope.launch {
+            val expense = db.expenseDao().getAllExpenses().find { it.id == editingExpenseId }
+            expense?.let {
+                etTitle.setText(it.title)
+                etAmount.setText(it.amount.toString())
+                etDate.setText(it.date)
+                etNotes.setText(it.notes ?: "")
+            }
+        }
     }
 
     private fun setupToolbar() {
         val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+        toolbar.title = if (editingExpenseId != -1) "Edit Expense" else "Add Expense"
         toolbar.setNavigationOnClickListener { finish() }
     }
 
@@ -89,6 +109,7 @@ class AddExpenseActivity : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 val expense = Expense(
+                    id = if (editingExpenseId != -1) editingExpenseId else 0,
                     title = title,
                     amount = amount,
                     category = category,
@@ -96,7 +117,7 @@ class AddExpenseActivity : AppCompatActivity() {
                     notes = if (notes.isEmpty()) null else notes
                 )
                 db.expenseDao().insertExpense(expense)
-                Toast.makeText(this@AddExpenseActivity, "Expense saved!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@AddExpenseActivity, if (editingExpenseId != -1) "Expense updated!" else "Expense saved!", Toast.LENGTH_SHORT).show()
                 finish()
             } catch (e: Exception) {
                 Toast.makeText(this@AddExpenseActivity, "Error saving expense", Toast.LENGTH_SHORT).show()

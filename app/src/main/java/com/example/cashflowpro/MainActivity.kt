@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.OvershootInterpolator
-import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -29,12 +28,17 @@ class MainActivity : AppCompatActivity() {
 
             setupEntranceAnimations()
 
-            findViewById<Button>(R.id.btnGetStarted)?.setOnClickListener {
-                startActivity(Intent(this, RegisterActivity::class.java))
+            findViewById<View>(R.id.dashboardPreview)?.setOnClickListener {
+                startActivity(Intent(this@MainActivity, DashboardActivity::class.java))
+                finish()
+            }
+
+            findViewById<com.google.android.material.button.MaterialButton>(R.id.btnGetStarted)?.setOnClickListener {
+                startActivity(Intent(this@MainActivity, RegisterActivity::class.java))
             }
             
-            findViewById<Button>(R.id.btnSignIn)?.setOnClickListener {
-                startActivity(Intent(this, LoginActivity::class.java))
+            findViewById<com.google.android.material.button.MaterialButton>(R.id.btnSignIn)?.setOnClickListener {
+                startActivity(Intent(this@MainActivity, LoginActivity::class.java))
             }
         } catch (e: Exception) {
             android.util.Log.e("MainActivity", "Crash in MainActivity", e)

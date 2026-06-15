@@ -36,10 +36,10 @@ class GoalsFragment : Fragment() {
 
     private fun setupListeners(view: View) {
         view.findViewById<View>(R.id.btnSetBudget).setOnClickListener {
-            startActivity(android.content.Intent(requireContext(), BudgetActivity::class.java))
+            startActivity(android.content.Intent(requireContext(), com.example.cashflowpro.GoalActivity::class.java))
         }
         view.findViewById<View>(R.id.btnAddSavingsGoal).setOnClickListener {
-            startActivity(android.content.Intent(requireContext(), SavingsGoalActivity::class.java))
+            startActivity(android.content.Intent(requireContext(), com.example.cashflowpro.SavingsGoalActivity::class.java))
         }
     }
 

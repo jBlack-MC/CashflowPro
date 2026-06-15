@@ -122,8 +122,7 @@ class SavingsGoalActivity : AppCompatActivity() {
 
     private fun deleteGoal(goal: SavingsGoal) {
         lifecycleScope.launch {
-            // Need a delete in DAO? 
-            // For now just mock refresh
+            db.savingsGoalDao().deleteGoal(goal)
             Toast.makeText(this@SavingsGoalActivity, "Goal removed", Toast.LENGTH_SHORT).show()
             loadGoals()
         }

@@ -1,5 +1,6 @@
 package com.example.cashflowpro.presentation.expenses
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -12,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cashflowpro.AddExpenseActivity
 import com.example.cashflowpro.HistoryAdapter
 import com.example.cashflowpro.R
 import com.example.cashflowpro.data.AppDatabase
@@ -72,9 +74,11 @@ class ExpensesFragment : Fragment() {
                 if (direction == ItemTouchHelper.LEFT) {
                     deleteExpense(expense, position)
                 } else {
-                    // Edit action
+                    // Edit action - currently reusing AddExpenseActivity for simplicity or placeholder
+                    val intent = Intent(requireContext(), AddExpenseActivity::class.java)
+                    intent.putExtra("EXPENSE_ID", expense.id)
+                    startActivity(intent)
                     adapter.notifyItemChanged(position)
-                    // TODO: Navigate to EditExpenseActivity
                 }
             }
         }
@@ -83,11 +87,13 @@ class ExpensesFragment : Fragment() {
 
     private fun deleteExpense(expense: Expense, position: Int) {
         viewLifecycleOwner.lifecycleScope.launch {
-            // Room deletion would go here, but for now we'll just show a snackbar and refresh
-            // db.expenseDao().deleteExpense(expense) // Need to add delete to DAO
+            db.expenseDao().deleteExpense(expense)
             Snackbar.make(rvExpenses, "Expense deleted", Snackbar.LENGTH_LONG)
                 .setAction("Undo") {
-                    // Handle undo
+                    viewLifecycleOwner.lifecycleScope.launch {
+                        db.expenseDao().insertExpense(expense)
+                        loadExpenses()
+                    }
                 }.show()
             loadExpenses()
         }
