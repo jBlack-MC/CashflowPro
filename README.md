@@ -22,7 +22,8 @@ Unlike standard trackers, Cashflow Pro uses a triple-state logic to monitor your
 To combat "budgeting fatigue," we integrated a rewards engine that tracks user behavior. Users earn XP and unlock badges (🥉, 🥈, 🥇) for maintaining streaks, reaching 50% of a goal, or staying under budget for a week. This turns a chore into a rewarding experience.
 
 ## 🎥 Demo Video
-[Watch the Cashflow Pro Walkthrough]([https://youtu.be/placeholder](https://youtu.be/kuoTVZuTQxc)) 
+[Watch the Cashflow Pro Walkthrough]
+
 https://youtu.be/kuoTVZuTQxc
 
 ## 📸 Screenshots
