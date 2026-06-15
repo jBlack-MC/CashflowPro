@@ -29,7 +29,8 @@ cashflow apk on a device
 <img width="208" height="437" alt="WhatsApp Image 2026-06-15 at 22 08 59" src="https://github.com/user-attachments/assets/8a616fc9-54a5-4f85-bf56-ef92871430d1" />
 
 | Welcome | Dashboard | Expenses |
-| :---: | :---: | :---: |
+| <img width="227" height="400" alt="WhatsApp Image 2026-06-15 at 23 03 39" src="https://github.com/user-attachments/assets/81a65a5f-89dc-4602-9e28-055d1fd056cc" />
+ | :---: | :---: |
 | ![Welcome](/screenshots/welcome.png) | ![Dashboard](/screenshots/dashboard.png) | ![Expenses](/screenshots/expenses.png) |
 
 | Analytics | Goals | Rewards |
