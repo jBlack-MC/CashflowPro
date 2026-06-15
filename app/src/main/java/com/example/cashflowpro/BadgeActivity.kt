@@ -37,13 +37,17 @@ class BadgeActivity : AppCompatActivity() {
 
     private fun loadBadges() {
         lifecycleScope.launch {
+            val expenses = db.expenseDao().getAllExpenses()
+            val goals = db.savingsGoalDao().getAllGoals()
+            val income = db.incomeDao().getAllIncome()
+
             val allBadges = listOf(
-                BadgeInfo("First Expense", "Log your first expense", "🥉", true),
-                BadgeInfo("Smart Saver", "Reach 50% of a savings goal", "🥈", true),
-                BadgeInfo("Budget Master", "Stay under budget for a week", "🥇", false),
-                BadgeInfo("High Earner", "Log income over R10,000", "💰", true),
-                BadgeInfo("Goal Getter", "Complete one savings goal", "🎯", false),
-                BadgeInfo("Streak Keeper", "Log expenses for 7 days", "🔥", false)
+                BadgeInfo("First Expense", "Log your first expense", "🥉", expenses.isNotEmpty()),
+                BadgeInfo("Smart Saver", "Reach 50% of a savings goal", "🥈", goals.any { it.targetAmount > 0 && it.currentAmount / it.targetAmount >= 0.5 }),
+                BadgeInfo("High Earner", "Log income over R10,000", "💰", income.any { it.amount >= 10000 }),
+                BadgeInfo("Goal Getter", "Complete one savings goal", "🎯", goals.any { it.targetAmount > 0 && it.currentAmount >= it.targetAmount }),
+                BadgeInfo("Massive Saver", "Save more than R5,000 in total", "💎", goals.sumOf { it.currentAmount } >= 5000),
+                BadgeInfo("Data Keeper", "Log more than 10 transactions", "📊", expenses.size >= 10)
             )
 
             val unlockedCount = allBadges.count { it.isUnlocked }
