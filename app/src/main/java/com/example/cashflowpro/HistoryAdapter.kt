@@ -25,7 +25,7 @@ class HistoryAdapter(private var expenses: List<Expense>) :
 
     override fun onBindViewHolder(holder: ExpenseViewHolder, position: Int) {
         val expense = expenses[position]
-        holder.tvDescription.text = expense.description
+        holder.tvDescription.text = expense.title
         holder.tvDate.text = expense.date
         holder.tvAmount.text = "R${String.format("%.2f", expense.amount)}"
         

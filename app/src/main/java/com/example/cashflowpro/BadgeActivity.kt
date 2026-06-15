@@ -53,7 +53,9 @@ class BadgeActivity : AppCompatActivity() {
                 if (badge.isUnlocked) {
                     val existing = savedBadges.find { it.id == badge.id }
                     if (existing == null) {
-                        db.badgeDao().insertBadge(badge.copy(unlockDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())))
+                        val unlockDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
+                        db.badgeDao().insertBadge(badge.copy(unlockDate = unlockDate))
+                        android.util.Log.d("Badge", "Badge Unlock: ${badge.name} on $unlockDate")
                     }
                 }
             }

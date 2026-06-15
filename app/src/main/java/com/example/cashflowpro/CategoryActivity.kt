@@ -55,10 +55,15 @@ class CategoryActivity : AppCompatActivity() {
 
     private fun saveCategory(name: String) {
         lifecycleScope.launch {
-            db.categoryDao().insertCategory(Category(name = name))
-            etCategoryName.text.clear()
-            loadCategories()
-            Toast.makeText(this@CategoryActivity, "Category added", Toast.LENGTH_SHORT).show()
+            try {
+                db.categoryDao().insertCategory(Category(name = name))
+                android.util.Log.d("Category", "Category Added: $name")
+                etCategoryName.text.clear()
+                loadCategories()
+                Toast.makeText(this@CategoryActivity, "Category added", Toast.LENGTH_SHORT).show()
+            } catch (e: Exception) {
+                android.util.Log.e("Database", "Category Insert Failed", e)
+            }
         }
     }
 

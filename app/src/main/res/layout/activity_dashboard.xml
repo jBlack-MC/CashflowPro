@@ -72,6 +72,45 @@
                         android:textSize="36sp"
                         android:textStyle="bold" />
 
+                    <com.google.android.material.progressindicator.LinearProgressIndicator
+                        android:id="@+id/budgetProgress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:trackColor="@color/white"
+                        app:indicatorColor="@color/success"
+                        app:trackThickness="8dp"
+                        app:trackCornerRadius="4dp"
+                        android:alpha="0.8"
+                        android:progress="0" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/tvPercentUsed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0%"
+                            android:textColor="@color/white"
+                            android:textStyle="bold"
+                            android:textSize="18sp"
+                            android:layout_marginEnd="8dp" />
+
+                        <TextView
+                            android:id="@+id/tvLeftLabel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="R5,000 left until you reach your limit"
+                            android:textColor="@color/white"
+                            android:alpha="0.8"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -213,6 +252,85 @@
                         android:textSize="12sp"
                         android:textColor="@color/text_hint" />
 
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Category Spending -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/AppCardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Category Spending"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginBottom="12dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="8dp">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="🍞 Groceries" />
+                        <TextView
+                            android:id="@+id/tvGroceriesSpent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="R0"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="8dp">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="🚗 Transport" />
+                        <TextView
+                            android:id="@+id/tvTransportSpent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="R0"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="🍿 Entertainment" />
+                        <TextView
+                            android:id="@+id/tvEntertainmentSpent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="R0"
+                            android:textStyle="bold" />
+                    </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 

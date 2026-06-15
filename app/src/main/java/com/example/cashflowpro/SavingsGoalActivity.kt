@@ -61,10 +61,15 @@ class SavingsGoalActivity : AppCompatActivity() {
         }
 
         lifecycleScope.launch {
-            db.savingsGoalDao().insertGoal(SavingsGoal(title = title, targetAmount = target, currentAmount = 0.0))
-            etGoalTitle.text.clear()
-            etTargetAmount.text.clear()
-            loadGoals()
+            try {
+                db.savingsGoalDao().insertGoal(SavingsGoal(title = title, targetAmount = target, currentAmount = 0.0))
+                android.util.Log.d("Goal", "Goal Saved: $title")
+                etGoalTitle.text.clear()
+                etTargetAmount.text.clear()
+                loadGoals()
+            } catch (e: Exception) {
+                android.util.Log.e("Database", "Goal Insert Failed", e)
+            }
         }
     }
 

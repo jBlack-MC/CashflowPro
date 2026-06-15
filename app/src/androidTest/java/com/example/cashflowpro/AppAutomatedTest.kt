@@ -56,16 +56,14 @@ class AppAutomatedTest {
 
     @Test
     fun goalCalculation() = runBlocking {
-        val budget = Budget(id = 1, min = 2000.0, max = 5000.0)
-        budgetDao.insertBudget(budget)
+        val goal = SavingsGoal(title = "New Car", targetAmount = 10000.0, currentAmount = 2500.0)
+        db.savingsGoalDao().insertGoal(goal)
         
-        val expense = Expense(title = "Rent", amount = 3500.0, category = "Housing", date = "01/01/2024")
-        expenseDao.insertExpense(expense)
+        val retrievedGoal = db.savingsGoalDao().getAllGoals().first { it.title == "New Car" }
+        val remaining = retrievedGoal.targetAmount - retrievedGoal.currentAmount
         
-        val totalSpent = expenseDao.getTotalExpenses() ?: 0.0
-        val currentBudget = budgetDao.getBudget()!!
-        
-        assertTrue(totalSpent >= currentBudget.min && totalSpent <= currentBudget.max)
+        assertEquals(7500.0, remaining, 0.0)
+        assertEquals(25.0, (retrievedGoal.currentAmount / retrievedGoal.targetAmount * 100), 0.0)
     }
 
     @Test
