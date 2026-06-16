@@ -93,7 +93,7 @@ CashflowPro/
 ## 👨‍💻 Authors
 Developed with ❤️ by the **Cashflow Pro Team**.
 
- **Sibusiso Mabena *ST10462532* 
+ **Sibusiso Mabena *ST10462545* 
 
 **Clarity Masuku *ST10438928*
 
